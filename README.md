@@ -1,9 +1,8 @@
 # Draft
 
-[![Compliance](https://github.com/ghostwriter/draft/actions/workflows/compliance.yml/badge.svg)](https://github.com/ghostwriter/draft/actions/workflows/compliance.yml)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/ghostwriter?label=Sponsor+@ghostwriter/draft&logo=GitHub+Sponsors)](https://github.com/sponsors/ghostwriter)
+[![Automation](https://github.com/ghostwriter/draft/actions/workflows/automation.yml/badge.svg)](https://github.com/ghostwriter/draft/actions/workflows/automation.yml)
 [![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/draft?color=8892bf)](https://www.php.net/supported-versions)
-[![Type Coverage](https://shepherd.dev/github/ghostwriter/draft/coverage.svg)](https://shepherd.dev/github/ghostwriter/draft)
-[![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/draft)](https://packagist.org/packages/ghostwriter/draft)
 [![Downloads](https://badgen.net/packagist/dt/ghostwriter/draft?color=blue)](https://packagist.org/packages/ghostwriter/draft)
 
 A code generation tool for Laravel developers.
