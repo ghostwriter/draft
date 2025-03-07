@@ -77,214 +77,151 @@ php artisan draft:trace
 ### Draft file: `draft.php`
 
 ```php
-// Note: Some if not most of the syntax below is currently pseudocode, I'm cleaning it up and building an API.
+<?php
 
-// ./draft.php
+// Note: Some if not most of the syntax below may change, I'm cleaning it up and building an API.
+
 <?php
 
 declare(strict_types=1);
 
-use App\Models\User;
-use Carbon\Carbon;
-use Ghostwriter\Draft\Contract\Controller\ActionInterface;
+use Ghostwriter\Draft\Application\Definition\Action\LivewireActionDefinition;
+use Ghostwriter\Draft\Application\Definition\LivewireDefinition;
+use Ghostwriter\Draft\Application\Definition\Router\RouteGroupDefinition;
+use Ghostwriter\Draft\Application\Definition\RouterDefinition;
 use Ghostwriter\Draft\Draft;
-use Ghostwriter\Draft\Value\Controller;
-use Ghostwriter\Draft\Value\Controller\Action;
-use Ghostwriter\Draft\Value\Controller\Statement\DispatchStatement;
-use Ghostwriter\Draft\Value\Controller\Statement\FireStatement;
-use Ghostwriter\Draft\Value\Controller\Statement\QueryStatement;
-use Ghostwriter\Draft\Value\Controller\Statement\RenderStatement;
-use Ghostwriter\Draft\Value\Controller\Statement\SessionStatement;
-use Ghostwriter\Draft\Value\Controller\Statement\ValidateStatement;
-use Ghostwriter\Draft\Value\Migration;
-use Ghostwriter\Draft\Value\Model;
-use Ghostwriter\Draft\Value\Router;
+use Ghostwriter\Draft\Application\Definition\Action\ControllerActionDefinition;
+use Ghostwriter\Draft\Application\Definition\Action\InertiaActionDefinition;
+use Ghostwriter\Draft\Application\Definition\ControllerDefinition;
+use Ghostwriter\Draft\Application\Definition\InertiaDefinition;
+use Ghostwriter\Draft\Application\Definition\MigrationDefinition;
+use Ghostwriter\Draft\Application\Definition\ModelDefinition;
+use Ghostwriter\Draft\Application\Definition\Test\TestCaseDefinition;
+use Ghostwriter\Draft\Application\Definition\TestDefinition;
+
+$resourceActions = ['index', 'create', 'edit', 'show', 'store', 'update', 'destroy'];
 
 return static function (Draft $draft): void {
-    //models:
-    //Post:
-    //      title: string:400
-    //    content: longtext
-    //    published_at: nullable timestamp
-    //    author_id: id:user
-    //
-    //controllers:
-    //  Post:
-    //    index:
-    //      query: all
-    //      render: post.index with:posts
-    //
-    //    store:
-    //      validate: title, content, author_id
-    //      save: post
-    //      send: ReviewPost to:post.author.email with:post
-    //      dispatch: SyncMedia with:post
-    //      fire: NewPost with:post
-    //      flash: post.title
-    //      redirect: post.index
-    // ===
-    $user = $draft->model(User::class);
+    $draft->model('Comment', function (ModelDefinition $definition): void {
+        $modelDefinition->relationships('author')->hasOne('User');
+        $modelDefinition->relationships('post')->hasOne('Post');
+    });
+    $draft->model('Post', function (ModelDefinition $definition): void {
+        $modelDefinition->relationships('author')->hasOne('User');
+        $modelDefinition->relationships('comments')->hasMany('Comment');
+        $modelDefinition->relationships('tags')->belongsToMany('Tag');
+//       $definition->casts();
+//       $definition->controller();
+//       $definition->fillable();
+//       $definition->hidden();
+//       $definition->migration();
+//       $definition->name();
+//       $definition->relationships();
+//       $definition->resourceController();
+//       $definition->table();
+//       $definition->test();
 
-    $draft->makeModel('Post', static function (Draft $draft, Model $model): Model {
-        $model->mergeCasts(['author_id'=> 'int', 'published_at'=> Carbon::class]);
-        $model->fillable(['title', 'content', 'published_at']);
-        $model->withMigration($post, static function (Draft $draft, Migration $table): Migration {
-            $table->id();
-            $table->string('title');
-            $table->text('content');
-            $table->foreignIdFor(User::class, 'author_id');
-            $table->timestamps();
-            return $table;
+    });
+    $draft->migration('Post', function (MigrationDefinition $migrationDefinition): void {
+        $migrationDefinition->id();
+        $migrationDefinition->foreignId('user_id');
+        $migrationDefinition->string('title', 150);
+        $migrationDefinition->text('content');
+        $migrationDefinition->timestamp('published_at')->nullable();
+        $migrationDefinition->timestamps();
+        $migrationDefinition->softDeletes();
+    });
+    $draft->migration('Comment', function (MigrationDefinition $migrationDefinition): void {
+        $migrationDefinition->id();
+        $migrationDefinition->foreignId('post_id');
+        $migrationDefinition->foreignId('user_id');
+        $migrationDefinition->text('content');
+        $migrationDefinition->timestamp('published_at')->nullable();
+        $migrationDefinition->timestamps();
+        $migrationDefinition->softDeletes();
+    });
+    $draft->controller('PostController', function (ControllerDefinition $controllerDefinition): void {
+        $controllerDefinition->resource('posts');
+
+        $controllerDefinition->action('posts.hide', function (ControllerActionDefinition $controllerActionDefinition): void {
+            $controllerActionDefinition->formRequest('HidePostRequest', [
+                'reason' => 'required',
+            ]);
+
+            $controllerActionDefinition->validate([
+                'reason' => 'required',
+            ]);
+
+            $controllerActionDefinition->save('post');
+            $controllerActionDefinition->send('PostHiddenNotification', 'post.author', ['post']);
+            $controllerActionDefinition->dispatch('HidePost', ['post']);
+            $controllerActionDefinition->fire('HidePost', ['post']);
+            $controllerActionDefinition->flash('success', 'post.title was successfully hidden.');
+            $controllerActionDefinition->render('posts.show', ['post']);
         });
-
-        $model->withController($post, static function (Draft $draft, Controller $controller): void {
-            // $controller->resource(static fn (Action $action): Action => $action->render()->send());
-            // $controller->resourceCollection(static fn (Action $action): Action => $action->render());
-
-            $controller->invokable('create',static fn (Action $action): Action => $action->fire('CreatePost')->render());
-
-            $controller->action('create',static fn (Action $action): Action => $action->fire('CreatePost')->render());
-            $controller->action('store',static fn (Action $action): Action => $action->fire('SavePost')->render());
-            $controller->action('show',static fn (Action $action): Action => $action->fire('GetPost')->render());
-
-            $controller->action(
-                    'view',
-                    static fn (ActionInterface $action): Action => $action->query(
-                        static fn (QueryStatement $queryStatement): QueryStatement => $queryStatement->with([
-                            'query' => 'where',
-                            'where' => ['title', 'content'],
-                            'order' => 'published_at',
-                            'limit' => 5,
-                        ])
-                    )
-                    ->render();
-            });
-            return $controller;
-        });
-
-        return $model;
     });
 
-    $post = $draft->model('Post');
-    $draft->controller(
-        $post,
-        static function (Draft $draft, Controller $controller) use($user, $draft): Controller {
-            $controller->model($post);
-            $controller->action(
-                    'show',
-                    static fn (Action $action) use ($post): Action => $action->query(
-                        'all',
-                        static fn (QueryStatement $queryStatement): QueryStatement => $queryStatement->with([
-                            'query' => 'where',
-                            'where' => ['title', 'content'],
-                            'order' => 'published_at',
-                            'limit' => 5,
-                        ])
-                    )
-                    ->render();
+    $draft->router( function (RouterDefinition $routerDefinition): void {
+        $routerDefinition->view('/', 'welcome');
+
+        $routerDefinition->group(function (RouteGroupDefinition $routeGroupDefinition) {
+            $middleware = ['web', 'auth'];
+            
+            $name = 'Comment';
+            $singular = Str::singular(Str::snake($name)); // comment
+            $plural = Str::plural($singular); // comments
+            $model = Str::studly($singular); // Comment
+            
+            $routeGroupDefinition->middleware($middleware)
+                                 ->prefix($plural)
+                                 ->name($plural . '.');
+            
+            $namespace = '\\App\\Livewire\\' . $model .'\\';
+            
+            $create = $namespace . 'Create' . $model;
+            $delete = $namespace . 'Delete' . $model;
+            $edit = $namespace . 'Edit' . $model;
+            $index = $namespace . 'Index' . $model;
+            $show = $namespace . 'Show' . $model;
+            $store = $namespace . 'Store' . $model;
+            $update = $namespace . 'Update' . $model;
+            
+            $routeGroupDefinition->delete('/{'.$singular.'}', $delete)->name('destroy');
+            $routeGroupDefinition->get('/', $index)->name('index');
+            $routeGroupDefinition->get('/create', $create)->name('create');
+            $routeGroupDefinition->get('/{'.$singular.'}', $show)->name('show');
+            $routeGroupDefinition->get('/{'.$singular.'}/edit', $edit)->name('edit');
+            $routeGroupDefinition->patch('/{'.$singular.'}', $update)->name('update');
+            $routeGroupDefinition->post('/', $store)->name('store');
+            $routeGroupDefinition->put('/{'.$singular.'}', $update)->name('update');
+        });
+        
+        $routerDefinition->get('contact', 'ContactController')->name('contact');
+
+        $routerDefinition->name('posts.hide');
+        $routerDefinition->resource('posts');
+
+    });
+
+    $draft->test('Post', function (TestDefinition $testDefinition): void {
+        $testDefinition->test(
+            'user can see all of their own posts',
+            function (TestCaseDefinition $testCaseDefinition): void {
+                // $testCaseDefinition->name();
             });
+    });
+    
+    $draft->livewire('auth.login', function (LivewireDefinition $livewireDefinition) :void {
+        $livewireDefinition->mount('user');
+        $livewireDefinition->action('login', function (LivewireActionDefinition $livewireActionDefinition));
+    });
 
-            $controller->action('store', static function (Action $action) use ($post): Action {
-                return $action->validate([])->flash()->with(['post' => $post]);
-            });
+    $draft->inertia('auth.logout', function (InertiaDefinition $inertiaDefinition) :void {
+        $inertiaDefinition->action('logout', function (InertiaActionDefinition $inertiaActionDefinition) : void {
 
-            $controller->action(
-                'index',
-                static function (Action $action) use ($post): Action {
-                    // query: where:title where:content order:published_at limit:5
-                    $action->query(
-                        'index',
-                        static fn (QueryStatement $queryStatement): QueryStatement => $queryStatement->withMany([
-                            'query' => 'where',
-                            'where' => ['title', 'content'],
-                            'order' => 'published_at',
-                            'limit' => 5,
-                        ])
-                    )
-                    ->render(static fn (RenderStatement $renderStatement): RenderStatement => $renderStatement->with([
-                        'posts' => $post,
-                        'users' => $controller->user()
-                    ]));
-
-                        $action->validate(
-                            'Flight',
-                            static fn (ValidateStatement $validateStatement): ValidateStatement => $validateStatement
-                        );
-
-                    //                $action->statement([
-                    //                    'query' => 'all',
-                    //                    'render' => 'post.index with:posts'
-                    //                ]);
-
-                    return $action;
-                }
-            );
-            return $controller;
-        }
-    );
-
-    $draft->migration(
-        $flight,
-        static function (Model $flight, Migration $table) use ($user): Migration {
-            $table->id();
-            $table->string('name');
-            $table->string('airline');
-            $table->foreignIdFor($user);
-            $table->timestamps();
-
-            return $table;
-        }
-    );
-    // ===
-    $draft->factory($user, $flight);
-    $draft->seeder($user, $flight);
-    // ===
-    dd([
-        //    array_map(static function (Blueprint $table): array {
-        //        return array_map(static function (ColumnDefinition $column): mixed {
-        //            return $column->getAttributes()['name'];
-        //        }, $table->getColumns());
-        //    }, $draft->migrations()),
-        $draft->controllers(),
-        $draft->factories(),
-        $draft->migrations(),
-        $draft->models(),
-        $draft->seeders(),
-    ]);
+        });
+    });
 };
-
-
-// NOTE: please ignore the braindump below.
-
-//declare()
-\Ghostwriter\Draft\ClassMap::class
-
-ClassMap
-->find
-->get
-->has
-->set
-->unset
-
-
-- path
-- name
-    - namespace
-        - declaration
-            - use
-            - declare
-            - variable
-        - class
-            - Members
-                - constant
-                - function/methods
-                - property
-        - constant
-        - function
-
-
-
-
 ```
 
 ## Testing
