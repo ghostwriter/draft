@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Contract;
+namespace Ghostwriter\Draft\Application\Interface;
 
 use Closure;
-use Ghostwriter\Draft\Value\Model;
 use PhpParser\Node\Stmt;
 
 interface DraftInterface
@@ -36,14 +35,14 @@ interface DraftInterface
      */
     public function model(string $name): ModelInterface;
 
-    /** @return array<Stmt> */
+    /** @return list<Stmt> */
     public function parse(string $code, string $path): array;
 
     public function user(): UserInterface;
 
-    //$draft->controllers(),
-    //$draft->factories(),
-    //$draft->migrations(),
-    //$draft->models(),
-    //$draft->seeders(),
+    // $draft->controllers(),
+    // $draft->factories(),
+    // $draft->migrations(),
+    // $draft->models(),
+    // $draft->seeders(),
 }
