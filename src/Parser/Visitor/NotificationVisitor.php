@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Visitor;
+namespace Ghostwriter\Draft\Parser\Visitor;
 
-use Ghostwriter\Draft\Visitor\Traits\NodeVisitorTrait;
+use Override;
 use PhpParser\Node;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Stmt\Class_;
@@ -14,25 +14,27 @@ final class NotificationVisitor implements NodeVisitor
 {
     use NodeVisitorTrait;
 
-    private ?Identifier $name = null;
+    private ?Class_ $class = null;
 
-    private ?Class_ $node = null;
+    private ?Identifier $identifier = null;
 
-    public function enterNode(Node $node): null|Node|int
+    #[Override]
+    public function enterNode(Node $node): null|int|Node
     {
         if (! $node instanceof Class_) {
             return self::dontTraverseChildren();
         }
 
-        $this->node = $node;
+        $this->class = $node;
 
         $nodeName = $node->name;
         if (null === $nodeName) {
-            $node->name = new Node\Identifier('Untitled');
+            $node->name = new Identifier('Untitled');
+
             return $node;
         }
 
-        $this->name = $nodeName;
+        $this->identifier = $nodeName;
 
         return null;
     }
