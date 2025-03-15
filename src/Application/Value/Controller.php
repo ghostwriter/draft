@@ -2,22 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Value;
+namespace Ghostwriter\Draft\Application\Value;
 
 use Closure;
-use Ghostwriter\Draft\Contract\Controller\ActionInterface;
-use Ghostwriter\Draft\Contract\ControllerInterface;
-use Ghostwriter\Draft\Contract\ModelInterface;
-use Ghostwriter\Draft\Contract\UserInterface;
-use Ghostwriter\Draft\Exception\RuntimeException;
-use Ghostwriter\Draft\Value\Controller\Action;
+use Ghostwriter\Draft\Application\Exception\RuntimeException;
+use Ghostwriter\Draft\Application\Interface\Controller\ActionInterface;
+use Ghostwriter\Draft\Application\Interface\ControllerInterface;
+use Ghostwriter\Draft\Application\Interface\ModelInterface;
+use Ghostwriter\Draft\Application\Interface\UserInterface;
 use Illuminate\Routing\Controller as IlluminateController;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Routing\Route;
-use Illuminate\Routing\Router;
+use Override;
+
+use function array_key_exists;
+use function sprintf;
 
 final class Controller extends IlluminateController implements ControllerInterface
 {
+    public $draft;
+
     /** @var array<string,ActionInterface> */
     private array $actions = [];
 
@@ -54,6 +57,7 @@ final class Controller extends IlluminateController implements ControllerInterfa
     /**
      * @param Closure(ActionInterface):void $factory
      */
+    #[Override]
     public function action(string $name, ?Closure $factory = null): void
     {
         if (array_key_exists($name, $this->actions)) {
@@ -63,6 +67,7 @@ final class Controller extends IlluminateController implements ControllerInterfa
         $this->actions[$name] = new Action($name, $factory);
     }
 
+    #[Override]
     public function actions(): iterable
     {
         yield from $this->actions;
@@ -78,6 +83,7 @@ final class Controller extends IlluminateController implements ControllerInterfa
         $this->apiResourceCollection = true;
     }
 
+    #[Override]
     public function getModel(): Model
     {
         return $this->model;
@@ -108,11 +114,13 @@ final class Controller extends IlluminateController implements ControllerInterfa
         return $this->resource;
     }
 
+    #[Override]
     public function model(string $name): ModelInterface
     {
         return $this->draft->model($name);
     }
 
+    #[Override]
     public function models(): iterable
     {
         yield from $this->models;
@@ -123,6 +131,7 @@ final class Controller extends IlluminateController implements ControllerInterfa
         $this->resource = true;
     }
 
+    #[Override]
     public function user(): UserInterface
     {
         $user = $this->user;
@@ -133,19 +142,20 @@ final class Controller extends IlluminateController implements ControllerInterfa
         throw new RuntimeException('No user was provided.');
     }
 
-//    public function route(Route $route): void
-//    {
-//        $this->router->controller($this::class);
-//        //        Route::resource('photos', PhotoController::class);
-//        //        Route::resources([
-//        //            'photos' => PhotoController::class,
-//        //            'posts' => PostController::class,
-//        //        ]);
-//    }
+    //    public function route(Route $route): void
+    //    {
+    //        $this->router->controller($this::class);
+    //        //        Route::resource('photos', PhotoController::class);
+    //        //        Route::resources([
+    //        //            'photos' => PhotoController::class,
+    //        //            'posts' => PostController::class,
+    //        //        ]);
+    //    }
+    #[Override]
     public function withUser(UserInterface $user): self
     {
         $currentUser = $this->user;
-        if (null !== $currentUser && $user === $currentUser) {
+        if ($currentUser instanceof UserInterface && $user === $currentUser) {
             return $this;
         }
 
