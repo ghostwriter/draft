@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft;
+namespace Ghostwriter\Draft\Parser;
 
-use Ghostwriter\Draft\Contract\ControllerInterface;
-use Ghostwriter\Draft\Contract\MigrationInterface;
-use Ghostwriter\Draft\Contract\ModelInterface;
-use Ghostwriter\Draft\Contract\UserInterface;
+use Ghostwriter\Draft\Application\Interface\ControllerInterface;
+use Ghostwriter\Draft\Application\Interface\MigrationInterface;
+use Ghostwriter\Draft\Application\Interface\UserInterface;
 use Illuminate\Support\Str;
-use PhpParser\Node;
 use PhpParser\Node\Stmt;
+
+use function array_key_exists;
 
 final class ClassMap
 {
@@ -20,14 +20,18 @@ final class ClassMap
     /** @var array<string,bool> */
     private array $factories = [];
 
-    /** @var array<string, array<Node|Stmt>> */
+    /** @var Stmt */
     private array $files = [];
 
     private array $map =  [
         'models' => [
             'model' => [
                 'controllers' => [],
-                'livewire-components' => [],
+                'components' => [
+                    'blade' => [],
+                    'inertia' => [],
+                    'livewire' => [],
+                ],
                 'factories' => [],
                 'policies' => [],
                 'forms' => [],
@@ -40,22 +44,18 @@ final class ClassMap
                 'formRequests' => [],
             ],
         ],
-        //        'createRequests' => [],
-        //        'updateRequests' => [],
     ];
 
     /** @var array<string,MigrationInterface> */
     private array $migrations = [];
 
-    /** @var array<string,ModelInterface|UserInterface> */
+    /** @var UserInterface */
     private array $models = [];
 
     /** @var array<string,bool> */
     private array $seeders = [];
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function addClass(string $class, string $path): void
     {
@@ -70,7 +70,7 @@ final class ClassMap
         }
     }
 
-    public function addClassConsts(array $constants, string $class, string $path)
+    public function addClassConsts(array $constants, string $class, string $path): void
     {
         $this->map[$path][$class]['const'] = $constants;
     }
@@ -103,6 +103,7 @@ final class ClassMap
             //            $info[$key] ?? [];
             $this->map['models'][$column][$info[$key]['path']] = $info[$key];
         }
+
         //        $this->map['models'][$info['model']['name']] = ['path' => $info['model']['path'], 'exists' => $info['model']['exists']];
         //        $this->map['controllers'][$info['controller']['name']] = ['path' => $info['controller']['path'], 'exists' => $info['controller']['exists']];
         //        $this->map['factories'][$info['factory']['name']] = ['path' => $info['factory']['path'], 'exists' => $info['factory']['exists']];
