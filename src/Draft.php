@@ -4,302 +4,372 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Draft;
 
-use Closure;
-use Ghostwriter\Draft\Contract\ControllerInterface;
-use Ghostwriter\Draft\Contract\DraftInterface;
-use Ghostwriter\Draft\Contract\MigrationInterface;
-use Ghostwriter\Draft\Contract\ModelInterface;
-use Ghostwriter\Draft\Contract\UserInterface;
-use Ghostwriter\Draft\Exception\RuntimeException;
-use Ghostwriter\Draft\Value\Controller;
-use Ghostwriter\Draft\Value\Migration;
-use Ghostwriter\Draft\Value\Model;
-use Ghostwriter\Draft\Value\User;
-use Illuminate\Config\Repository;
-use Illuminate\Container\Container;
-use Illuminate\Database\Eloquent\Model as IlluminateModel;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Support\Str;
-use PhpParser\Node\Stmt;
-use PhpParser\NodeVisitorAbstract;
-use PhpParser\Parser;
+use Ghostwriter\CaseConverter\Interface\CaseConverterInterface;
+use Ghostwriter\Container\Attribute\Provider;
+use Ghostwriter\Container\Container;
+use Ghostwriter\Draft\Application\Definition\ControllerDefinition;
+use Ghostwriter\Draft\Application\Definition\EventDefinition;
+use Ghostwriter\Draft\Application\Definition\FactoryDefinition;
+use Ghostwriter\Draft\Application\Definition\InertiaDefinition;
+use Ghostwriter\Draft\Application\Definition\JobDefinition;
+use Ghostwriter\Draft\Application\Definition\LivewireDefinition;
+use Ghostwriter\Draft\Application\Definition\MailDefinition;
+use Ghostwriter\Draft\Application\Definition\MigrationDefinition;
+use Ghostwriter\Draft\Application\Definition\ModelDefinition;
+use Ghostwriter\Draft\Application\Definition\NotificationDefinition;
+use Ghostwriter\Draft\Application\Definition\PolicyDefinition;
+use Ghostwriter\Draft\Application\Definition\RouterDefinition;
+use Ghostwriter\Draft\Application\Definition\RuleDefinition;
+use Ghostwriter\Draft\Application\Definition\SeederDefinition;
+use Ghostwriter\Draft\Application\Definition\TestDefinition;
+use Ghostwriter\Draft\Application\Definition\ViewDefinition;
+use Ghostwriter\Draft\Application\Formatter;
+use Ghostwriter\Draft\Application\Interface\DefinitionInterface;
+use Ghostwriter\Draft\Container\ServiceProvider;
+use Throwable;
 
-use function base_path;
+use function array_key_exists;
 
-final class Draft extends NodeVisitorAbstract implements DraftInterface
+#[Provider(ServiceProvider::class)]
+final class Draft
 {
-    /** @var array<string,ControllerInterface> */
-    private array $controllers = [];
+    public const array RESOURCE_ACTIONS = ['index', 'create', 'edit', 'show', 'store', 'update', 'destroy'];
 
-    /** @var array<string,bool> */
-    private array $factories = [];
-
-    /** @var array<string, array<Stmt>> */
-    private array $files = [];
-
-    /** @var array<string,MigrationInterface> */
-    private array $migrations = [];
-
-    /** @var array<string,ModelInterface|UserInterface> */
-    private array $models = [];
-
-    /** @var array<string,bool> */
-    private array $seeders = [];
-
-    /** @noinspection ForgottenDebugOutputInspection */
     public function __construct(
-        private readonly Container $container,
-        private readonly Dispatcher $dispatcher,
-        private readonly Parser $parser,
-    ) {
-        //        $dispatcher->listen(
-        //            '*',
-        //            static fn (string $eventName, array $attribute): mixed => dump($eventName, $attribute)
-        //        );
+        private array $controllerDefinitions = [],
+        private array $eventDefinitions = [],
+        private array $factoryDefinitions = [],
+        private array $inertiaDefinitions = [],
+        private array $jobDefinitions = [],
+        private array $livewireDefinitions = [],
+        private array $mailDefinitions = [],
+        private array $migrationDefinitions = [],
+        private array $modelDefinitions = [],
+        private array $notificationDefinitions = [],
+        private array $policyDefinitions = [],
+        private array $routeDefinitions = [],
+        private array $ruleDefinitions = [],
+        private array $seederDefinitions = [],
+        private array $testsDefinitions = [],
+        private array $viewDefinitions = [],
+    ) {}
 
-        # options
-        # arguments
-        # tokens
+    /** @throws Throwable */
+    public static function new(callable $factory): self
+    {
+        $container = Container::getInstance();
 
-        /** @var class-string|string $key */
-        $key = config('draft.default.user');
-        $user = $this->container->has($key) ?
-            $this->container->get($key) :
-            new class() extends IlluminateModel {
-            };
+        $draft = $container->get(self::class);
 
-        // Todo: set the user UserInterface::class in models array.
-        $this->models[UserInterface::class] = new class($user) implements UserInterface {
-            private ?MigrationInterface $migration = null;
+        $container->call($factory);
 
-            public function __construct(
-                private IlluminateModel $model
-            ) {
-                //
-            }
+        $container->clear();
 
-            public function controller(): string
-            {
-                return '';
-            }
-
-            public function name(): string
-            {
-                return basename(config('draft.default.user'));
-            }
-
-            public function namespace(): string
-            {
-                return $this->model->getQualifiedKeyName();
-            }
-
-            public function table(): string
-            {
-                return Str::of($this->name())->plural()->lower()->toString();
-            }
-
-            public function migration(): MigrationInterface
-            {
-                return $this->migration ??= new Migration(new Model($this->name()));
-            }
-
-            public function withMigration(?Closure $factory = null): void
-            {
-                if ($factory instanceof Closure) {
-                    $this->migration = $factory($this->migration());
-                }
-            }
-        };
+        return $draft;
     }
 
-    public function controller(ModelInterface $model, Closure $factory): ControllerInterface
+    /** @throws Throwable */
+    public function controller(string $name, callable $factory): void
     {
-        $name = $model->table();
-        if (array_key_exists($name, $this->controllers)) {
-            return $this->controllers[$name];
-        }
-
-        throw new RuntimeException(sprintf('Controller "%s" dose not exists.', $name));
+        $this->call($this->controllerDefinition($name), $factory);
     }
 
-    public function controllerPath(): string
+    public function controllerDefinitions(): array
     {
-        return base_path('app/Http/Controllers');
+        return $this->controllerDefinitions;
     }
 
-    public function controllers(): array
+    public function eventDefinitions(): array
     {
-        return $this->controllers;
+        return $this->eventDefinitions;
     }
 
-    public function factories(): array
+    public function factoryDefinitions(): array
     {
-        return $this->factories;
+        return $this->factoryDefinitions;
     }
 
-    public function factory(ModelInterface ...$models): void
+    /** @throws Throwable */
+    public function inertia(string $name, callable $factory): void
     {
-        foreach ($models as $model) {
-            $table = $model->table();
-            if (! array_key_exists($table, $this->factories)) {
-                $this->factories[$table] = true;
-            }
-        }
+        $this->call($this->inertiaDefinition($name), $factory);
     }
 
-    public function getContainer(): Container
+    public function inertiaDefinitions(): array
     {
-        return $this->container;
+        return $this->inertiaDefinitions;
     }
 
-    public function getDispatcher(): Dispatcher
+    public function jobDefinitions(): array
     {
-        return $this->dispatcher;
+        return $this->jobDefinitions;
     }
 
-    public function hasController(ControllerInterface $controller): bool
+    /** @throws Throwable */
+    public function livewire(string $name, callable $factory): void
     {
-        return array_key_exists($controller->getModel()->name(), $this->controllers);
+        $this->call($this->livewireDefinition($name), $factory);
     }
 
-    public function hasFactory(ModelInterface $model): bool
+    public function livewireDefinitions(): array
     {
-        return array_key_exists($model->table(), $this->factories);
+        return $this->livewireDefinitions;
     }
 
-    public function hasMigration(ModelInterface $model): bool
+    public function mailDefinitions(): array
     {
-        return array_key_exists($model->table(), $this->migrations);
+        return $this->mailDefinitions;
     }
 
-    public function hasModel(ModelInterface $model): bool
+    public function migration(string $model, callable $factory): void
     {
-        return array_key_exists($model->name(), $this->models);
+        $this->model($model, static fn (ModelDefinition $modelDefinition) => $modelDefinition->migration($factory));
     }
 
-    public function hasSeeder(ModelInterface $model): bool
+    public function migrationDefinitions(): array
     {
-        return array_key_exists($model->table(), $this->seeders);
+        return $this->migrationDefinitions;
     }
 
-    public function makeController(ModelInterface $model, ?Closure $factory = null): void
+    /** @throws Throwable */
+    public function model(string $name, callable $factory): ModelDefinition
     {
-        $name = $model->name();
-        if (array_key_exists($name, $this->controllers)) {
-            throw new RuntimeException(sprintf('"%sController" already exists.', $name));
-        }
+        $modelDefinition = $this->modelDefinition($name);
 
-        $factory ??= static fn (
-            DraftInterface $draft,
-            ControllerInterface $controller
-        ): ControllerInterface => $controller;
+        //        $modelDefinitionName = $modelDefinition->name(); // User
 
-        $controller = $factory($this, new Controller($model));
-        if ($controller instanceof ControllerInterface) {
-            $this->controllers[$name] = $controller->withUser($this->user());
-            return;
-        }
+        //        $this->factoryDefinition($modelDefinitionName); // FactoryDefinition<UserFactory>
+        //        $this->seederDefinition($modelDefinitionName); // SeederDefinition<UserSeeder>
+        //        $this->policyDefinition($modelDefinitionName); // PolicyDefinition<UserPolicy>
+        //        $this->featureTestDefinition($modelDefinitionName); // TestDefinition<Feature\UserTest>
+        //        $this->unitTestDefinition($modelDefinitionName); // TestDefinition<Unit\UserTest>
 
-        throw new RuntimeException(sprintf('Failed to construct a "%sController".', $name));
+        $this->call($modelDefinition, $factory);
+
+        return $modelDefinition;
     }
 
-    public function makeModel(string $name, ?Closure $factory = null): void
+    public function modelDefinitions(): array
     {
-        $modelName = Str::of($name)->singular()->ucfirst()->toString();
-        if (array_key_exists($modelName, $this->models)) {
-            throw new RuntimeException(sprintf('Model "%s" already exists.', $name));
-        }
-        $factory ??= static fn (Draft $draft, Model $model): Model => $model;
-
-        $this->models[$modelName] = $factory($this, new Model($name));
+        return $this->modelDefinitions;
     }
 
-    public function migrations(): array
+    public function notificationDefinitions(): array
     {
-        return $this->migrations;
+        return $this->notificationDefinitions;
     }
 
-    public function model(string $name): ModelInterface
+    public function policyDefinitions(): array
     {
-        $modelName = Str::of($name)->singular()->ucfirst()->toString();
-
-        if (array_key_exists($modelName, $this->models)) {
-            return $this->models[$modelName];
-        }
-
-        throw new RuntimeException(sprintf('Model "%s" does not exist.', $name));
+        return $this->policyDefinitions;
     }
 
-    public function modelPath(): string
+    public function resourceController(string $name): void
     {
-        return base_path('app/Models');
+        $pluralName = $this->formatter()->pluralize($name);
+
+        $this->controller(
+            $name,
+            static fn (
+                ControllerDefinition $controllerDefinition,
+            )
+                => $controllerDefinition->resource($pluralName),
+        );
     }
 
-    public function models(): array
+    public function routeDefinitions(): array
     {
-        return $this->models;
+        return $this->routeDefinitions;
+    }
+
+    public function router(callable $factory): void
+    {
+        $factory($this->routeDefinitions[RouterDefinition::class] ??= RouterDefinition::new($factory));
+    }
+
+    public function ruleDefinitions(): array
+    {
+        return $this->ruleDefinitions;
+    }
+
+    public function seederDefinitions(): array
+    {
+        return $this->seederDefinitions;
     }
 
     /**
-     * @return array<Stmt>
+     * @throws Throwable
      */
-    public function parse(string $code, string $path): array
+    public function test(string $model, callable $factory): void
     {
-        return $this->files[$path] ??=
-            $this->parser->parse($code) ?? [];
+        $this->model($model, static fn (ModelDefinition $modelDefinition) => $modelDefinition->test($factory));
     }
 
-
-//    /**
-//     * @param array<Stmt> $models
-//     * @return array<Node>
-//     */
-//    public function traverse(array $nodes): array
-//    {
-//        return $this->traverser->traverse($nodes);
-//    }
-
-    public function seeder(Model ...$models): void
+    public function testsDefinitions(): array
     {
-        foreach ($models as $model) {
-            $tableName = $model->table();
-            if (! array_key_exists($tableName, $this->seeders)) {
-                $this->seeders[$tableName] = true;
-                $this->factories[$tableName] = true;
-            }
+        return $this->testsDefinitions;
+    }
+
+    public function viewDefinitions(): array
+    {
+        return $this->viewDefinitions;
+    }
+
+    /**
+     * @param callable(DefinitionInterface):void $factory
+     *
+     * @throws Throwable
+     */
+    private function call(DefinitionInterface $definition, callable $factory): void
+    {
+        Container::getInstance()->call($factory, [$definition]);
+    }
+
+    private function caseConverter(): CaseConverterInterface
+    {
+        return Container::getInstance()->get(CaseConverterInterface::class);
+    }
+
+    private function controllerDefinition(string $name): ControllerDefinition
+    {
+        $controllerName = $this->formatter()->formatControllerName($name);
+
+        return $this->controllerDefinitions[$controllerName] ??= ControllerDefinition::new($controllerName);
+    }
+
+    private function eventDefinition(string $name): EventDefinition
+    {
+        $eventName = $this->formatter()->formatEventName($name);
+
+        return $this->eventDefinitions[$eventName] ??= EventDefinition::new($eventName);
+    }
+
+    private function factoryDefinition(string $name): FactoryDefinition
+    {
+        $factoryName = $this->formatter()->formatFactoryName($name);
+
+        return $this->factoryDefinitions[$factoryName] ??= FactoryDefinition::new($factoryName);
+    }
+
+    private function featureTestDefinition(string $name): TestDefinition
+    {
+        $testName = $this->formatter()->formatTestName($name, 'Feature');
+
+        return $this->testsDefinitions[$testName] ??= TestDefinition::new($testName);
+    }
+
+    private function formatter(): Formatter
+    {
+        return Container::getInstance()->get(Formatter::class);
+    }
+
+    private function inertiaDefinition(string $name): InertiaDefinition
+    {
+        $componentName = $this->formatter()->formatComponentName($name);
+
+        if (array_key_exists($componentName, $this->inertiaDefinitions)) {
+            return $this->inertiaDefinitions[$componentName];
         }
+
+        $livewireDefinition = Container::getInstance()->build(InertiaDefinition::class, [
+            'name' => $componentName,
+        ]);
+
+        $livewireDefinition->render($this->caseConverter()->toKebabCase($componentName));
+
+        return $this->inertiaDefinitions[$componentName] = $livewireDefinition;
     }
 
-    public function seeders(): array
+    private function jobDefinition(string $name): JobDefinition
     {
-        return $this->seeders;
+        $jobName = $this->formatter()->formatJobName($name);
+
+        return $this->jobDefinitions[$jobName] ??= new JobDefinition($jobName);
     }
 
-    public function user(): UserInterface
+    private function livewireDefinition(string $name): LivewireDefinition
     {
-        //        $this->container->get($this->userProviderModel());
-        return $this->models[UserInterface::class]
-            ??= new User($this->container->build($this->userProviderModel()));
-        //    ?? throw new RuntimeException('User model is missing.');
+        $componentName = $this->formatter()->formatComponentName($name);
+
+        if (array_key_exists($componentName, $this->livewireDefinitions)) {
+            return $this->livewireDefinitions[$componentName];
+        }
+
+        $livewireDefinition = new LivewireDefinition($componentName);
+
+        $livewireDefinition->render($this->caseConverter()->toKebabCase($componentName));
+
+        return $this->livewireDefinitions[$componentName] = $livewireDefinition;
     }
 
-    private static function modelName(ModelInterface $model): string
+    private function mailDefinition(string $name): MailDefinition
     {
-        return Str::of($model->table())->singular()->ucfirst()->toString();
+        $mailName = $this->formatter()->formatMailName($name);
+
+        return $this->mailDefinitions[$mailName] ??= new MailDefinition($mailName);
     }
 
-    private function userProviderModel(): string
+    private function migrationDefinition(string $name): MigrationDefinition
     {
-        /** @var Repository $config */
-        $config = $this->container->get('config');
+        $migrationName = $this->formatter()->formatMigrationName($name);
 
-        /** @var string $guard */
-        $guard = $config->get('auth.defaults.guard');
+        return $this->migrationDefinitions[$migrationName] ??= new MigrationDefinition($migrationName);
+    }
 
-        /** @var string $provider */
-        $provider = $config->get(sprintf('auth.guards.%s.provider', $guard));
+    private function modelDefinition(string $name): ModelDefinition
+    {
+        $modelName = $this->formatter()->formatModelName($name);
 
-        /** @return class-string<Model> $model */
-        return $config->get(sprintf('auth.providers.%s.model', $provider));
+        return $this->modelDefinitions[$modelName] ??= new ModelDefinition(
+            $modelName,
+            $this->formatter()->formatTableName($name),
+        );
+    }
+
+    private function notificationDefinition(string $name): NotificationDefinition
+    {
+        $notificationName = $this->formatter()->formatNotificationName($name);
+
+        return $this->notificationDefinitions[$notificationName] ??= new NotificationDefinition($notificationName);
+    }
+
+    private function policyDefinition(string $name): PolicyDefinition
+    {
+        $policyName = $this->formatter()->formatPolicyName($name);
+
+        return $this->policyDefinitions[$policyName] ??= new PolicyDefinition($policyName);
+    }
+
+    private function ruleDefinition(string $name): RuleDefinition
+    {
+        $ruleName = $this->formatter()->formatRuleName($name);
+
+        return $this->ruleDefinitions[$ruleName] ??= new RuleDefinition($ruleName);
+    }
+
+    private function seederDefinition(string $name): SeederDefinition
+    {
+        $seederName = $this->formatter()->formatSeederName($name);
+
+        return $this->seederDefinitions[$seederName] ??= new SeederDefinition($seederName);
+    }
+
+    private function toPlural(string $name): string
+    {
+        return $this->inflector()->pluralize($name);
+    }
+
+    private function unitTestDefinition(string $name): TestDefinition
+    {
+        $testName = $this->formatter()->formatTestName($name, 'Unit');
+
+        return $this->testsDefinitions[$testName] ??= new TestDefinition($testName);
+    }
+
+    private function viewDefinition(string $name): ViewDefinition
+    {
+        $viewName = $this->formatter()->formatViewName($name);
+
+        return $this->viewDefinitions[$viewName] ??= new ViewDefinition($viewName);
     }
 }
