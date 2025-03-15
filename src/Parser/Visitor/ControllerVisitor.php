@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Visitor;
+namespace Ghostwriter\Draft\Parser\Visitor;
 
-use Ghostwriter\Draft\Visitor\Traits\NodeVisitorTrait;
+use Override;
 use PhpParser\Node;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Stmt\Class_;
@@ -14,10 +14,11 @@ final class ControllerVisitor implements NodeVisitor
 {
     use NodeVisitorTrait;
 
-    private ?Identifier $name = null;
+    private ?Identifier $identifier = null;
 
     private ?Node $node = null;
 
+    #[Override]
     public function enterNode(Node $node): mixed
     {
         if (! $node instanceof Class_) {
@@ -31,7 +32,7 @@ final class ControllerVisitor implements NodeVisitor
             return null;
         }
 
-        $this->name = $nodeName;
+        $this->identifier = $nodeName;
 
         return null;
     }
