@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Action;
+namespace Ghostwriter\Draft\Parser;
 
 use Generator;
-use Ghostwriter\Draft\ClassMap;
-use Ghostwriter\Draft\Draft;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use PhpParser\Node\Stmt;
@@ -17,26 +15,29 @@ use PhpParser\NodeFinder;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor\NameResolver;
 
+use function assert;
+use function base_path;
+
 final class FindControllers
 {
     /**
-     * @var array<string,array<string>>
+     * @var array<string,list<string>>
      */
     private array $controllers = [];
 
     /**
      * @throws FileNotFoundException
      *
-     * @return Generator<string,array<Stmt>>
+     * @return Generator<string,list<Stmt>>
      */
-    public function __invoke(Draft $draft, Filesystem $filesystem, ClassMap $classMap): Generator
+    public function __invoke(DraftVisitor $draft, Filesystem $filesystem, ClassMap $classMap): Generator
     {
-        $traverser = new NodeTraverser();
+        $nodeTraverser = new NodeTraverser();
         $nameResolver = new NameResolver();
-        $traverser->addVisitor($nameResolver);
+        $nodeTraverser->addVisitor($nameResolver);
 
         $nodeFinder = new NodeFinder();
-        foreach ($filesystem->files($draft->controllerPath()) as $controller) {
+        foreach ($filesystem->files(self::controllerPath()) as $controller) {
             $path = $controller->getRealPath();
             if (false === $path) {
                 throw new FileNotFoundException();
@@ -44,22 +45,22 @@ final class FindControllers
 
             $nodes = $draft->parse($filesystem->get($path), $controller->getFilename());
 
-            /** @var array<Class_> $classes */
+            /** @var list<Class_> $classes */
             $classes = $nodeFinder->findInstanceOf($nodes, Class_::class);
             foreach ($classes as $class) {
                 $className = NodeExtractor::getName($class);
                 $classMap->addClass($className, $path);
 
-                /** @var array<ClassConst> $constants */
+                /** @var list<ClassConst> $constants */
                 $constants = $nodeFinder->findInstanceOf($class, ClassConst::class);
                 foreach ($constants as $constant) {
                     $constant = NodeExtractor::getConsts($constant);
-                    /** @var array<string,array<string>> $current */
+                    /** @var array<string,list<string>> $current */
                     $current =&$this->controllers[$path][$className]['constant'];
-                    array_push($current, $constant);
+                    $current[] = $constant;
                 }
 
-                /** @var array<ClassMethod> $methods */
+                /** @var list<ClassMethod> $methods */
                 $methods = $nodeFinder->findInstanceOf($class, ClassMethod::class);
                 foreach ($methods as $method) {
                     $methodName = NodeExtractor::getName($method);
@@ -74,20 +75,27 @@ final class FindControllers
 
                 //                $this->controllers[$path][$className][] = true;
             }
+
             //            yield $path => $draft->parse($filesystem->get($path), $controller->getFilename());
             //            $this->controllers[$path] = $ast;
             //             [$className]['constant'][sprintf('%s::%s', $className, $constName)]
             //                 = $constValue;
         }
+
         yield $classMap;
         //        yield from $this->controllers;
     }
 
     /**
-     * @return array<string>
+     * @return list<string>
      */
     public function getControllers(): array
     {
         return $this->controllers;
+    }
+
+    public static function controllerPath(): string
+    {
+        return base_path('app/Http/Controllers');
     }
 }
