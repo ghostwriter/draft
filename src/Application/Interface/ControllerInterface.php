@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Contract;
+namespace Ghostwriter\Draft\Application\Interface;
 
 use Closure;
-use Ghostwriter\Draft\Contract\Controller\ActionInterface;
+use Ghostwriter\Draft\Application\Interface\Controller\ActionInterface;
 
 interface ControllerInterface
 {
