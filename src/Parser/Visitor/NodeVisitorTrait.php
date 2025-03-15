@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Visitor\Traits;
+namespace Ghostwriter\Draft\Parser\Visitor;
 
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
@@ -42,18 +42,6 @@ trait NodeVisitorTrait
     }
 
     /**
-     * If NodeVisitor::enterNode() returns DONT_TRAVERSE_CHILDREN, child nodes of the current node will not be traversed
-     * for any visitors.
-     *
-     * For subsequent visitors NodeVisitor::enterNode() will still be called on the current node and
-     * NodeVisitor::leaveNode() will also be invoked for the current node.
-     */
-    public static function dontTraverseChildren(): int
-    {
-        return NodeTraverser::DONT_TRAVERSE_CHILDREN;
-    }
-
-    /**
      * Called when entering a node.
      *
      * Return value semantics:
@@ -88,6 +76,24 @@ trait NodeVisitorTrait
         return null;
     }
 
+    public function traverse(array $nodes, ?NodeTraverser $nodeTraverser = null): iterable
+    {
+        yield from ($nodeTraverser ??= new NodeTraverser())
+            ->traverse($nodes);
+    }
+
+    /**
+     * If NodeVisitor::enterNode() returns DONT_TRAVERSE_CHILDREN, child nodes of the current node will not be traversed
+     * for any visitors.
+     *
+     * For subsequent visitors NodeVisitor::enterNode() will still be called on the current node and
+     * NodeVisitor::leaveNode() will also be invoked for the current node.
+     */
+    public static function dontTraverseChildren(): int
+    {
+        return NodeTraverser::DONT_TRAVERSE_CHILDREN;
+    }
+
     /**
      * If NodeVisitor::leaveNode() returns REMOVE_NODE for a node that occurs in an array, it will be removed from the
      * array.
@@ -107,12 +113,6 @@ trait NodeVisitorTrait
     public static function stopTraversal(): int
     {
         return NodeTraverser::STOP_TRAVERSAL;
-    }
-
-    public function traverse(array $nodes, ?NodeTraverser $nodeTraverser = null): iterable
-    {
-        yield from ($nodeTraverser ??= new NodeTraverser())
-            ->traverse($nodes);
     }
 
     /**
