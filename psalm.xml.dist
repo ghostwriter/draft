@@ -1,37 +1,75 @@
 <?xml version="1.0"?>
 <psalm
-    errorLevel="1"
-    findUnusedCode="true"
-    findUnusedBaselineEntry="true"
-    findUnusedVariablesAndParams="true"
-    findUnusedPsalmSuppress="true"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
-    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
-    errorBaseline="psalm-baseline.xml"
+    xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/vimeo/psalm/6.x/config.xsd"
+    allConstantsGlobal="true"
+    allFunctionsGlobal="true"
+    autoloader="vendor/autoload.php"
     cacheDirectory=".cache/psalm"
+    checkForThrowsDocblock="true"
+    checkForThrowsInGlobalScope="true"
+    ensureArrayIntOffsetsExist="true"
+    ensureArrayStringOffsetsExist="true"
+    errorBaseline="psalm-baseline.xml"
+    errorLevel="1"
+    findUnusedPsalmSuppress="true"
+    findUnusedVariablesAndParams="true"
+    hideAllErrorsExceptPassedFiles="false"
+    limitMethodComplexity="true"
+    memoizeMethodCallResults="true"
+    restrictReturnTypes="true"
+    useDocblockPropertyTypes="true"
+    usePhpDocMethodsWithoutMagicCall="true"
+    usePhpDocPropertiesWithoutMagicCall="true"
 >
     <projectFiles>
         <directory name="src"/>
         <directory name="tests"/>
-        <ignoreFiles>
-            <directory name=".github"/>
-            <directory name="config"/>
-            <directory name="docs"/>
-            <directory name="tests/Fixture"/>
+        <ignoreFiles allowMissingFiles="true">
+            <directory name=".cache"/>
+            <directory name="tests/fixture"/>
             <directory name="vendor"/>
-            <file name="ecs.php"/>
-            <file name="rector.php"/>
         </ignoreFiles>
     </projectFiles>
-    <issueHandlers>
-        <MissingConstructor>
-            <errorLevel type="suppress">
-                <directory name="tests" />
-            </errorLevel>
-        </MissingConstructor>
-    </issueHandlers>
     <plugins>
-        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+        <!-- <pluginClass class="Ghostwriter\PsalmPlugin\Plugin"/> -->
     </plugins>
+    <issueHandlers>
+        <MissingOverrideAttribute>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </MissingOverrideAttribute>
+        <MissingThrowsDocblock>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </MissingThrowsDocblock>
+        <PossiblyUnusedMethod>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </PossiblyUnusedMethod>
+        <PossiblyUnusedProperty>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </PossiblyUnusedProperty>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+        <RedundantConditionGivenDocblockType>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </RedundantConditionGivenDocblockType>
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </UnusedClass>
+    </issueHandlers>
 </psalm>
