@@ -2,13 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Command;
+namespace Ghostwriter\Draft\Console\Command;
 
-use Ghostwriter\Draft\Action\FindControllers;
-use Ghostwriter\Draft\Action\FindModels;
-use Ghostwriter\Draft\Draft;
+use Ghostwriter\Container\Interface\ContainerInterface;
+use Ghostwriter\Draft\Parser\FindControllers;
+use Ghostwriter\Draft\Parser\FindModels;
+use Ghostwriter\Draft\Parser\Visitor\DraftVisitor;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+
+use function dd;
+use function dump;
+use function iterator_to_array;
 
 final class BuildCommand extends Command
 {
@@ -17,8 +22,11 @@ final class BuildCommand extends Command
     protected $signature = 'draft:build';
 
     public function __construct(
-        private readonly Draft $draft,
-        private readonly Filesystem $filesystem
+        private readonly ContainerInterface $container,
+        //        private readonly DraftVisitor $draft,
+        //        private readonly Filesystem $filesystem,
+        //        private readonly FindControllers $findControllers,
+        //        private readonly FindModels $findModels,
     ) {
         parent::__construct();
     }
@@ -28,15 +36,15 @@ final class BuildCommand extends Command
      */
     public function handle(): int
     {
-        $models = iterator_to_array((new FindModels($this->draft, $this->filesystem))());
-        $controllers = iterator_to_array((new FindControllers($this->draft, $this->filesystem))());
+        // return self::SUCCESS;
+        $models = iterator_to_array($this->container->invoke(FindModels::class));
+        $controllers = iterator_to_array($this->container->invoke(FindControllers::class));
+        //        $controllers = iterator_to_array((new FindControllers($this->draft, $this->filesystem))());
 
-        dd([$models, $controllers]);
+        dump([$models, $controllers]);
         //            $this->callSilently('queue:monitor', []);
 
         //        dd(app()->getNamespace());
-
-        //        return self::SUCCESS;
 
         // dd($this->draft);
         //        $controllers = collect($this->filesystem->files(app()->basePath('app/http/controllers')))
