@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Action;
+namespace Ghostwriter\Draft\Parser;
 
 use PhpParser\Node\Const_;
 use PhpParser\Node\Expr\Array_;
@@ -20,33 +20,45 @@ use PhpParser\Node\Stmt\ClassConst;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\PropertyProperty;
 
+use function array_merge;
+use function array_reduce;
+use function dd;
+use function is_string;
+
 final class NodeExtractor
 {
+    public static function debug(mixed ...$arguments): mixed
+    {
+        // This is a placeholder for debugging purposes.
+        dd($arguments);
+
+        return $arguments; // Return null to avoid breaking the flow
+    }
+
     public static function getClass(mixed $node): mixed
     {
         $node = $node->class;
-        /** @noinspection ForgottenDebugOutputInspection */
+
         return match (true) {
             null === $node => null,
             $node instanceof FullyQualified => $node->toString(),
-            default => dd([
-                __FUNCTION__ => $node,
-            ]),
+            default => self::debug($node),
         };
     }
 
-    public static function getConsts(ClassConst $node): array
+    public static function getConsts(ClassConst $classConst): array
     {
         return array_reduce(
-            $node->consts,
-            static function (array $carry, Const_ $item) {
+            $classConst->consts,
+            static function (array $carry, Const_ $const) {
                 /** @var ?string $nodeKey */
-                $nodeKey = self::getName($item);
+                $nodeKey = self::getName($const);
                 /** @var mixed $nodeValue */
-                $nodeValue = self::getValue($item);
+                $nodeValue = self::getValue($const);
 
                 if (null === $nodeKey) {
                     $carry[] = $nodeValue;
+
                     return $carry;
                 }
 
@@ -62,30 +74,29 @@ final class NodeExtractor
     {
         /** @var mixed $node */
         $node = $node->default;
-        /** @noinspection ForgottenDebugOutputInspection */
+
         return match (true) {
-            default => dd([
-                __FUNCTION__ => $node,
-            ]),
+            default => self::debug($node),
             null === $node => null,
             $node instanceof Array_ => self::getItems($node),
             $node instanceof ConstFetch => self::getName($node),
         };
     }
 
-    public static function getItems(Array_ $node): mixed
+    public static function getItems(Array_ $array): mixed
     {
         return array_reduce(
-            $node->items,
-            static function (array $carry, ArrayItem $item) {
+            $array->items,
+            static function (array $carry, ArrayItem $arrayItem) {
                 /** @var ?string $nodeKey */
-                $nodeKey = self::getKey($item);
+                $nodeKey = self::getKey($arrayItem);
 
                 /** @var mixed $nodeValue */
-                $nodeValue = self::getValue($item);
+                $nodeValue = self::getValue($arrayItem);
 
                 if (null === $nodeKey) {
                     $carry[] = $nodeValue;
+
                     return $carry;
                 }
 
@@ -97,84 +108,76 @@ final class NodeExtractor
         );
     }
 
-    public static function getKey(ArrayItem $node): mixed
+    public static function getKey(ArrayItem $arrayItem): mixed
     {
-        $node = $node->key;
-        /** @noinspection ForgottenDebugOutputInspection */
+        $arrayItem = $arrayItem->key;
+
         return match (true) {
-            null === $node => null,
-            $node instanceof String_ => self::getValue($node),
-            default => dd([
-                __FUNCTION__ => $node,
-            ]),
+            null === $arrayItem => null,
+            $arrayItem instanceof String_ => self::getValue($arrayItem),
+            default => self::debug($arrayItem),
         };
     }
 
     public static function getName(
-        Variable|ConstFetch|ClassConstFetch|Const_|Class_|Identifier|ClassMethod|PropertyProperty $node
+        Class_|ClassConstFetch|ClassMethod|Const_|ConstFetch|Identifier|PropertyProperty|Variable $node
     ): ?string {
         $node = $node->name;
-        /** @noinspection ForgottenDebugOutputInspection */
+
         return match (true) {
             null === $node => null,
             is_string($node) => $node,
             $node instanceof Identifier => self::getName($node),
             $node instanceof Name => $node->toString(),
-            default => dd([
-                __FUNCTION__ => $node,
-            ]),
+            default => self::debug($node),
         };
     }
 
-    public static function getParams(ClassMethod $node): array
+    public static function getParams(ClassMethod $classMethod): array
     {
         return array_reduce(
-            $node->params,
-            static fn (array $carry, Param $param): array =>
-                array_merge($carry, [
+            $classMethod->params,
+            static fn (array $carry, Param $param): array
+                => array_merge($carry, [
                     self::getVar($param) => self::getDefault($param),
                 ]),
             []
         );
     }
 
-    public static function getProps(ClassMethod $node): array
+    public static function getProps(ClassMethod $classMethod): array
     {
         return array_reduce(
-            $node->props,
-            static fn (array $carry, Param $param): array =>
-            array_merge($carry, [
+            $classMethod->props,
+            static fn (array $carry, Param $param): array
+            => array_merge($carry, [
                 self::getVar($param) => self::getDefault($param),
             ]),
             []
         );
     }
 
-    public static function getValue(ConstFetch|String_|ClassConstFetch|ArrayItem|Const_ $node): mixed
+    public static function getValue(ArrayItem|ClassConstFetch|Const_|ConstFetch|String_ $node): mixed
     {
         /** @var mixed $node */
         $node = $node->value;
-        /** @noinspection ForgottenDebugOutputInspection */
+
         return match (true) {
             $node instanceof ClassConstFetch => self::getClass($node) . '::' . self::getName($node),
             $node instanceof ConstFetch => self::getName($node),
             $node instanceof String_ => self::getValue($node),
-            default => dd([
-                __FUNCTION__ => $node,
-            ]),
+            default => self::debug($node),
             is_string($node) => $node,
         };
     }
 
-    public static function getVar(Param $node): mixed
+    public static function getVar(Param $param): mixed
     {
-        $node = $node->var;
-        /** @noinspection ForgottenDebugOutputInspection */
+        $param = $param->var;
+
         return match (true) {
-            default => dd([
-                __FUNCTION__ => $node,
-            ]),
-            $node instanceof Variable => self::getName($node),
+            default => self::debug($param),
+            $param instanceof Variable => self::getName($param),
         };
     }
 }
