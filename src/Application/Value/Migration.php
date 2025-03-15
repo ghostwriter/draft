@@ -2,21 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Value;
+namespace Ghostwriter\Draft\Application\Value;
 
-use Ghostwriter\Draft\Contract\MigrationInterface;
+use Ghostwriter\Draft\Application\Interface\MigrationInterface;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Str;
+use Override;
 
 final class Migration extends Blueprint implements MigrationInterface
 {
+    public $table;
+
     private ?string $foreignKey = null;
 
     public function __construct(
         private readonly Model $model
-    ) {
-        parent::__construct($this->model->table());
-    }
+    ) {}
 
     public function getForeignKey(): string
     {
@@ -28,6 +29,7 @@ final class Migration extends Blueprint implements MigrationInterface
             ->toString();
     }
 
+    #[Override]
     public function getModel(): Model
     {
         return $this->model;
