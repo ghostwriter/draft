@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Contract;
+namespace Ghostwriter\Draft\Application\Interface;
 
 use PhpParser\Node;
 
@@ -33,24 +33,6 @@ interface VisitorInterface
     public function beforeTraverse(array $nodes): ?array;
 
     /**
-     * If NodeVisitor::enterNode() returns DONT_TRAVERSE_CHILDREN, child nodes of the current node will not be traversed
-     * for any visitors.
-     *
-     * For subsequent visitors NodeVisitor::enterNode() will still be called on the current node and
-     * NodeVisitor::leaveNode() will also be invoked for the current node.
-     */
-    public static function dontTraverseChildren(): int;
-
-    /**
-     * If NodeVisitor::enterNode() returns DONT_TRAVERSE_CURRENT_AND_CHILDREN, child nodes of the current node will not
-     * be traversed for any visitors.
-     *
-     * For subsequent visitors enterNode() will not be called as well. leaveNode() will be invoked for visitors that has
-     * enterNode() method invoked.
-     */
-    public static function dontTraverseCurrentAndChildren(): int;
-
-    /**
      * Called when entering a node.
      *
      * Return value semantics:
@@ -79,7 +61,25 @@ interface VisitorInterface
      *
      * @return null|array<array-key,Node>|int|Node Replacement node (or special return value)
      */
-    public function leaveNode(Node $node): null|int|Node|array;
+    public function leaveNode(Node $node): null|array|int|Node;
+
+    /**
+     * If NodeVisitor::enterNode() returns DONT_TRAVERSE_CHILDREN, child nodes of the current node will not be traversed
+     * for any visitors.
+     *
+     * For subsequent visitors NodeVisitor::enterNode() will still be called on the current node and
+     * NodeVisitor::leaveNode() will also be invoked for the current node.
+     */
+    public static function dontTraverseChildren(): int;
+
+    /**
+     * If NodeVisitor::enterNode() returns DONT_TRAVERSE_CURRENT_AND_CHILDREN, child nodes of the current node will not
+     * be traversed for any visitors.
+     *
+     * For subsequent visitors enterNode() will not be called as well. leaveNode() will be invoked for visitors that has
+     * enterNode() method invoked.
+     */
+    public static function dontTraverseCurrentAndChildren(): int;
 
     /**
      * Remove a node that occurs in an array of nodes If returned by ::leaveNode().
