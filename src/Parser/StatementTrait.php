@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Traits;
+namespace Ghostwriter\Draft\Parser;
+
+use function spl_object_hash;
 
 trait StatementTrait
 {
@@ -14,8 +16,7 @@ trait StatementTrait
     public function __construct(
         private string $name,
         private iterable $attributes = []
-    ) {
-    }
+    ) {}
 
     public function getAttributes(): iterable
     {
