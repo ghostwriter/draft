@@ -4,16 +4,41 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Draft;
 
-use Ghostwriter\Draft\Command\InitCommand;
-use Ghostwriter\Draft\Command\NewCommand;
-use Ghostwriter\Draft\Command\TraceCommand;
-use Illuminate\Container\Container;
+use Doctrine\Inflector\Inflector;
+use Doctrine\Inflector\InflectorFactory;
+use Ghostwriter\CaseConverter\CaseConverter;
+use Ghostwriter\CaseConverter\Interface\CaseConverterInterface;
+use Ghostwriter\Container\Container;
+use Ghostwriter\Container\Interface\ContainerInterface;
+use Ghostwriter\Draft\Console\Command\BuildCommand;
+use Ghostwriter\Draft\Console\Command\InitCommand;
+use Ghostwriter\Draft\Console\Command\NewCommand;
+use Ghostwriter\Draft\Console\Command\TraceCommand;
+// use Illuminate\Container\Container;
+use Ghostwriter\Draft\Parser\Printer;
+use Ghostwriter\Draft\Parser\PrinterInterface;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\ServiceProvider;
+use Override;
 use PhpParser\Parser;
 use PhpParser\ParserFactory;
 
+use const DIRECTORY_SEPARATOR;
+
+use function config_path;
+use function dirname;
+
 final class DraftServiceProvider extends ServiceProvider
 {
+    private const array COMMANDS = [
+        BuildCommand::class,
+        InitCommand::class,
+        NewCommand::class,
+        TraceCommand::class,
+    ];
+
     /**
      * Bootstrap the application services.
      */
@@ -48,25 +73,37 @@ final class DraftServiceProvider extends ServiceProvider
             ], 'lang');*/
 
             // Registering package commands.
-            $this->commands([InitCommand::class, NewCommand::class, TraceCommand::class]);
+            $this->commands(self::COMMANDS);
+
+            $this->optimizes(optimize: 'package:optimize', clear: 'package:clear-optimizations');
         }
+
+        AboutCommand::add('My Package', static fn () => [
+            'Version' => '1.0.0',
+        ]);
+
+        Model::shouldBeStrict();
     }
 
     /**
      * Register the application services.
      */
+    #[Override]
     public function register(): void
     {
-        // Automatically apply the package configuration
-        $this->mergeConfigFrom(dirname(__DIR__) . '/config/draft.php', 'draft');
-
-        // Register the main class to use with the facade
-        $this->app->singleton(ParserFactory::class, static fn (): ParserFactory => new ParserFactory());
-        $this->app->singleton(
-            Parser::class,
-            static fn (Container $container): Parser =>
-            $container->build(ParserFactory::class)->create(ParserFactory::PREFER_PHP7)
+        $this->mergeConfigFrom(
+            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'draft.php',
+            'draft'
         );
-        $this->app->bind(Draft::class);
+
+        $application = $this->app;
+        $application->bind(CaseConverterInterface::class, CaseConverter::class);
+        $application->bind(PrinterInterface::class, Printer::class);
+        $application->singleton(Inflector::class, static fn (): Inflector => InflectorFactory::create()->build());
+        $application->singleton(ContainerInterface::class, static fn (): Container => Container::getInstance());
+        $application->singleton(
+            Parser::class,
+            static fn (): Parser => $application->get(ParserFactory::class)->createForNewestSupportedVersion(),
+        );
     }
 }
