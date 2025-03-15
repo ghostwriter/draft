@@ -2,90 +2,172 @@
 
 declare(strict_types=1);
 
-require_once '/Users/nathane/Desktop/GitHub/ghostwriter/draft/vendor/autoload.php';
+require dirname(__DIR__,2) . '/vendor/autoload.php';
 
+use App\Livewire\Settings\Appearance;
+use App\Livewire\Settings\Password;
+use App\Livewire\Settings\Profile;
 use App\Models\User;
 use Carbon\Carbon;
+use Ghostwriter\Draft\Application\Definition\ControllerDefinition;
+use Ghostwriter\Draft\Application\Definition\MigrationDefinition;
+use Ghostwriter\Draft\Application\Definition\ModelDefinition;
+use Ghostwriter\Draft\Application\Definition\RouteDefinition;
+use Ghostwriter\Draft\Application\Definition\Router\RouteGroupDefinition;
+use Ghostwriter\Draft\Application\Definition\RouterDefinition;
+use Ghostwriter\Draft\Application\Definition\Statement\DispatchStatementDefinition;
+use Ghostwriter\Draft\Application\Definition\Statement\FireStatementDefinition;
+use Ghostwriter\Draft\Application\Definition\Statement\QueryStatementDefinition;
+use Ghostwriter\Draft\Application\Definition\Statement\RenderStatementDefinition;
+use Ghostwriter\Draft\Application\Definition\Statement\SessionStatementDefinition;
+use Ghostwriter\Draft\Application\Definition\Statement\ValidateStatementDefinition;
+use Ghostwriter\Draft\Application\Value\Action;
+use Ghostwriter\Draft\Application\Value\Controller;
+use Ghostwriter\Draft\Application\Value\Migration;
+use Ghostwriter\Draft\Application\Value\Model;
+use Ghostwriter\Draft\Application\Value\Router;
 use Ghostwriter\Draft\Draft;
-use Ghostwriter\Draft\Value\Controller;
-use Ghostwriter\Draft\Value\Controller\Action;
-use Ghostwriter\Draft\Value\Controller\Statement\DispatchStatement;
-use Ghostwriter\Draft\Value\Controller\Statement\FireStatement;
-use Ghostwriter\Draft\Value\Controller\Statement\QueryStatement;
-use Ghostwriter\Draft\Value\Controller\Statement\RenderStatement;
-use Ghostwriter\Draft\Value\Controller\Statement\SessionStatement;
-use Ghostwriter\Draft\Value\Controller\Statement\ValidateStatement;
-use Ghostwriter\Draft\Value\Migration;
-use Ghostwriter\Draft\Value\Model;
-use Ghostwriter\Draft\Value\Router;
-use Illuminate\Container\Container;
-use Illuminate\Events\Dispatcher;
+use Illuminate\Support\Str;
 
 return static function (Draft $draft): void {
-    // ===
-    //$draft = new Draft(new Dispatcher(), new Container());
-    // ===
-    $user = $draft->model(User::class, static function (Model $user): Model {
-        $user->fillable(['name', 'email', 'password', 'api_key', 'ssn', 'published_at']);
-        $user->mergeCasts([
-            'published_at'=> Carbon::class,
-        ]);
-        $user->makeHidden(['password', 'api_key', 'ssn']);
-        return $user;
+    $draft->router(static function (RouterDefinition $routerDefinition): void {
+        $middleware = [];
+
+        $name = 'article';
+
+        $middleware =  array_unique(array_merge($middleware, ['web', 'verified']));
+        $singular = Str::singular(Str::snake($name)); // article
+        $plural = Str::plural($singular); // articles
+        $name = Str::studly($singular); // Article
+
+
+        $routerDefinition->middleware()->group(function (RouteGroupDefinition $routerGroupDefinition) use ($singular, $plural, $name): void {
+            $routerGroupDefinition->prefix($plural)->name($plural, '.');
+
+            $namespace = '\\App\\Livewire\\' . $name .'\\';
+            $create = $namespace . 'Create' . $name;
+            $delete = $namespace . 'Delete' . $name;
+            $edit = $namespace . 'Edit' . $name;
+            $index = $namespace . 'Index' . $name;
+            $show = $namespace . 'Show' . $name;
+            $store = $namespace . 'Store' . $name;
+            $update = $namespace . 'Update' . $name;
+
+            $routerGroupDefinition->delete('/{'.$singular.'}', $delete)->name('destroy');
+            $routerGroupDefinition->get('/', $index)->name('index');
+            $routerGroupDefinition->get('/create', $create)->name('create');
+            $routerGroupDefinition->get('/{'.$singular.'}', $show)->name('show');
+            $routerGroupDefinition->get('/{'.$singular.'}/edit', $edit)->name('edit');
+            $routerGroupDefinition->patch('/{'.$singular.'}', $update)->name('update');
+            $routerGroupDefinition->post('/', $store)->name('store');
+            $routerGroupDefinition->put('/{'.$singular.'}', $update)->name('update');
+
+            $routerGroupDefinition->resource('update');
+            $routerGroupDefinition->any('update', 'update');
+            $routerGroupDefinition->fallback('update', 'update');
+//              Route::fallback()
+//                Route::view('nds', 'sdsd');
+        });
+        $routerDefinition->view('/', 'welcome');
+        // $action
+        // :
+        // :
+        //Route any(string $uri, array|Closure|null|string $action = null)
+        //Routedelete(string $uri, array|Closure|null|string $action = null)
+        //Routeget(string $uri, array|Closure|null|string $action = null)
+        //Routeoptions(string $uri, array|Closure|null|string $action = null)
+        //Routepatch(string $uri, array|Closure|null|string $action = null)
+        //Routepost(string $uri, array|Closure|null|string $action = null)
+        //Routeput(string $uri, array|Closure|null|string $action = null)
+
+        //RouteRegistrar as(string $value)
+        //RouteRegistrar can(string|UnitEnum $ability, array|string $models = [])
+        //RouteRegistrar controller(string $controller)
+        //RouteRegistrar domain(BackedEnum|string $value)
+        //RouteRegistrar middleware(array|null|string $middleware)
+        //RouteRegistrar missing(Closure $missing)
+        //RouteRegistrar name(BackedEnum|string $value)
+        //RouteRegistrar namespace(null|string $value)
+        //RouteRegistrar prefix(string $prefix)
+        //RouteRegistrar scopeBindings()
+        //RouteRegistrar where(array $where)
+        //RouteRegistrar withoutMiddleware(array|string $middleware)
+        //RouteRegistrar withoutScopedBindings()
+
+        \Illuminate\Routing\Router::get('/','Ghostwriter\Draft\Application\Value\Controller@action');
+
+        $routerDefinition->get('/', 'HomeController')->name('home');
+        $routerDefinition->get('/contact','ContactComponent')->name('contact');
+        $routerDefinition->post('/contact','ContactComponent')->name('contact');
+        $routerDefinition->resource('posts')->name('contact');
+
+        $routerDefinition->middleware('auth', 'verified')
+                         ->group(function (RouteGroupDefinition $routerGroupDefinition) {
+                             $routerGroupDefinition->view('dashboard', 'dashboard')->name('dashboard');
+                         });
+
+        $routerDefinition->middleware('auth')
+                         ->group(function (RouteGroupDefinition $routerGroupDefinition) {
+                             $routerGroupDefinition->redirect('settings', 'settings/profile');
+                             $routerGroupDefinition->get('settings/profile', Profile::class)->name('settings.profile');
+                             $routerGroupDefinition->get('settings/password', Password::class)->name('settings.password');
+                             $routerGroupDefinition->get('settings/appearance', Appearance::class)->name('settings.appearance');
+                         });
     });
-    //$user = $draft->model('User', static function (Model $user): Model {
-    //    $user->fillable(['name', 'email', 'password', 'api_key', 'ssn', 'published_at']);
-    //    $user->mergeCasts([
-    //        'published_at'=> Carbon::class,
-    //    ]);
-    //    $user->makeHidden(['password', 'api_key', 'ssn']);
-    //    return $user;
-    //});
-    //$draft->controller($user, static function (Model $model, Controller $controller, Router $router): Controller {
-    //    //    dump([$model, $controller, $controller->getMiddleware()]);
-    //    return $controller;
-    //});
-    //$draft->migration($user, static function (Model $model, Migration $table): Migration {
-    //    $table->id();
-    //    $table->string('name');
-    //    $table->string('email');
-    //    $table->string('password');
-    //    $table->string('ssn');
-    //    $table->timestamps();
-    //
-    //    return $table;
-    //});
-    // ===
-    $flight = $draft->model('Flight', static function (Model $flight): Model {
-        $flight->mergeCasts([
+    $draft->router(static function(RouterDefinition $routerDefinition){
+        $routerDefinition->middleware('web')->group(function (){
+
+        });});
+
+    $user = $draft->model('User', static function (ModelDefinition $modelDefinition): void {
+        // automatically generates the migrations
+
+        $modelDefinition->fillable(['name', 'email', 'password', 'api_key', 'ssn', 'published_at']);
+        $modelDefinition->casts(['published_at'=> Carbon::class]);
+        $modelDefinition->hidden(['password', 'api_key', 'ssn']);
+    });
+    $draft->controller('User', static function (ControllerDefinition $controller, Router $router): void {
+//            dump([$model, $controller, $controller->middlewares()]);
+//            $router->apiResource()
+    });
+    $draft->migration('User', static function (Model $model, MigrationDefinition $table): void {
+        $table->id();
+        $table->string('name');
+        $table->string('email');
+        $table->string('password');
+        $table->string('ssn');
+        $table->timestamps();
+    });
+
+    $draft->model('Flight', static function (ModelDefinition $flight): void {
+        $flight->casts([
             'published_at'=> Carbon::class,
         ]);
         $flight->fillable(['name', 'airline', 'published_at']);
-        return $flight;
     });
 
     $draft->controller(
-        $flight,
+        'Flight',
         static function (Model $flight, Controller $controller, Router $router) use ($user): Controller {
-            $controller->model($user);
+            $controller->model($user->name());
             $controller->action(
                 'index',
                 static function (Action $action) use ($flight, $user): Action {
                     $action->dispatchJob(
                         'BookFlight',
-                        static fn (DispatchStatement $dispatchStatement): DispatchStatement => $dispatchStatement
+                        static fn (DispatchStatementDefinition $dispatchStatement): DispatchStatementDefinition => $dispatchStatement
                     )->withMany([
                         'users' => $user,
                         'flights' => $flight,
                     ]);
                     $action->fire(
                         'FlightBooked',
-                        static fn (FireStatement $fireStatement): FireStatement => $fireStatement
+                        static fn (FireStatementDefinition $fireStatement): FireStatementDefinition => $fireStatement
                     );
                     // query: where:title where:content order:published_at limit:5
                     $action->query(
                         'FlightBookedMail',
-                        static fn (QueryStatement $queryStatement): QueryStatement => $queryStatement
+                        static fn (QueryStatementDefinition $queryStatement): QueryStatementDefinition => $queryStatement
                     )->withMany([
                         'query' => 'where',
                         'where' => ['title', 'content'],
@@ -94,22 +176,22 @@ return static function (Draft $draft): void {
                     ]);
                     $action->render(
                         'flight.index',
-                        static fn (RenderStatement $renderStatement): RenderStatement => $renderStatement
+                        static fn (RenderStatementDefinition $renderStatement): RenderStatementDefinition => $renderStatement
                     )
-                        ->with('flights', $flight);
+                           ->with('flights', $flight);
                     $action->session(
                         'FlashMessage',
-                        static fn (SessionStatement $sessionStatement): SessionStatement => $sessionStatement
+                        static fn (SessionStatementDefinition $sessionStatement): SessionStatementDefinition => $sessionStatement
                     );
                     $action->validate(
                         'Flight',
-                        static fn (ValidateStatement $validateStatement): ValidateStatement => $validateStatement
+                        static fn (ValidateStatementDefinition $validateStatement): ValidateStatementDefinition => $validateStatement
                     );
 
-                    //                $action->statement([
-                    //                    'query' => 'all',
-                    //                    'render' => 'post.index with:posts'
-                    //                ]);
+                    $action->statement([
+                        'query' => 'all',
+                        'render' => 'post.index with:posts'
+                    ]);
 
                     return $action;
                 }
@@ -119,7 +201,7 @@ return static function (Draft $draft): void {
     );
 
     $draft->migration(
-        $flight,
+        '$flight',
         static function (Model $flight, Migration $migration) use ($user): Migration {
             $migration->id();
             $migration->string('name');
@@ -131,8 +213,8 @@ return static function (Draft $draft): void {
         }
     );
     // ===
-    $draft->factory($user, $flight);
-    $draft->seeder($user, $flight);
+//    $draft->factory($user, $flight);
+//    $draft->seeder($user, $flight);
     // ===
     dd([
         //    array_map(static function (Blueprint $migration): array {
