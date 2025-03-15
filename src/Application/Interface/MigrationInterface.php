@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft\Contract;
+namespace Ghostwriter\Draft\Application\Interface;
 
 interface MigrationInterface
 {
