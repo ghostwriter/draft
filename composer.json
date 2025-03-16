@@ -55,7 +55,6 @@
         "livewire/flux": "@stable",
         "orchestra/testbench": "@stable",
         "phpunit/phpunit": "@stable",
-        "symfony/var-dumper": "@stable",
         "vimeo/psalm": "@stable"
     },
     "conflict": {},
@@ -82,6 +81,7 @@
             "ghostwriter/coding-standard": true,
             "infection/extension-installer": true
         },
+        "bump-after-update": false,
         "classmap-authoritative": false,
         "discard-changes": true,
         "optimize-autoloader": true,
