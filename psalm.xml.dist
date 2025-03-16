@@ -28,7 +28,7 @@
         <directory name="tests"/>
         <ignoreFiles allowMissingFiles="true">
             <directory name=".cache"/>
-            <directory name="tests/fixture"/>
+            <directory name="tests/Fixture"/>
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>

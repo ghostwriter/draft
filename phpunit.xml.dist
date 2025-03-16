@@ -43,11 +43,11 @@
     <testsuites>
         <testsuite name="Feature">
             <directory>tests/Feature</directory>
-            <exclude>tests/fixture</exclude>
+            <exclude>tests/Fixture</exclude>
         </testsuite>
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
-            <exclude>tests/fixture</exclude>
+            <exclude>tests/Fixture</exclude>
         </testsuite>
     </testsuites>
     <php>
