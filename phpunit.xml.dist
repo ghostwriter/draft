@@ -41,21 +41,9 @@
         </include>
     </source>
     <testsuites>
-        <testsuite name="Feature">
-            <directory>tests/Feature</directory>
-            <exclude>tests/Fixture</exclude>
-        </testsuite>
-        <testsuite name="Unit">
+        <testsuite name="default">
             <directory>tests/Unit</directory>
             <exclude>tests/Fixture</exclude>
         </testsuite>
     </testsuites>
-    <php>
-        <env name="APP_KEY" value="AckfSECXIvnK5r28GVIWUAxmbBSjTsmF"/>
-        <env name="DB_CONNECTION" value="testing"/>
-        <env name="DB_DATABASE" value="testing"/>
-        <env name="DB_HOST" value="localhost"/>
-        <env name="DB_PASSWORD" value="secret"/>
-        <env name="DB_USERNAME" value="root"/>
-    </php>
 </phpunit>
