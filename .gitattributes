@@ -8,8 +8,7 @@
 /.gitignore export-ignore
 /composer.lock export-ignore
 /docs export-ignore
-/infection.json.dist export-ignore
-/phpbench.json.dist export-ignore
+/infection.json5.dist export-ignore
 /phpunit.xml.dist export-ignore
 /psalm-baseline.xml export-ignore
 /psalm.xml.dist export-ignore
