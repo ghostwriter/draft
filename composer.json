@@ -1,7 +1,7 @@
 {
     "name": "ghostwriter/draft",
     "description": "A code generation tool for Laravel developers.",
-    "license": "BSD-3-Clause",
+    "license": "BSD-4-Clause",
     "type": "library",
     "keywords": [
         "ghostwriter",
