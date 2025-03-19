@@ -51,6 +51,7 @@
         "nikic/php-parser": "^5.4.0"
     },
     "require-dev": {
+        "ghostwriter/coding-standard": "dev-main",
         "infection/infection": "@stable",
         "livewire/flux": "@stable",
         "orchestra/testbench": "@stable",
