@@ -54,9 +54,7 @@
         "ghostwriter/coding-standard": "dev-main",
         "infection/infection": "@stable",
         "livewire/flux": "@stable",
-        "orchestra/testbench": "@stable",
-        "phpunit/phpunit": "@stable",
-        "vimeo/psalm": "@stable"
+        "orchestra/testbench": "@stable"
     },
     "conflict": {},
     "minimum-stability": "stable",
