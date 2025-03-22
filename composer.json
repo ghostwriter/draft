@@ -52,9 +52,9 @@
     },
     "require-dev": {
         "ghostwriter/coding-standard": "dev-main",
-        "infection/infection": "@stable || ~0.29.14",
-        "livewire/flux": "@stable || ~2.1.1",
-        "orchestra/testbench": "@stable || ~10.1.0"
+        "infection/infection": "~0.29.14 || @stable",
+        "livewire/flux": "~2.1.1 || @stable",
+        "orchestra/testbench": "~10.1.0 || @stable"
     },
     "conflict": {},
     "minimum-stability": "stable",
