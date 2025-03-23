@@ -8062,12 +8062,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "29c102cfd5374c46e840e2aeea86cfc5a3da900e"
+                "reference": "0852f3845126fdd47e811fcedf2311ddb27db224"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/29c102cfd5374c46e840e2aeea86cfc5a3da900e",
-                "reference": "29c102cfd5374c46e840e2aeea86cfc5a3da900e",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/0852f3845126fdd47e811fcedf2311ddb27db224",
+                "reference": "0852f3845126fdd47e811fcedf2311ddb27db224",
                 "shasum": ""
             },
             "require": {
@@ -8100,7 +8100,7 @@
                 "infection/infection": "~0.29.14",
                 "mockery/mockery": "~1.6.12",
                 "php": "^8.4",
-                "phpunit/phpunit": "~11.5.14 || ~12.0.9",
+                "phpunit/phpunit": "~11.5.14 || ~12.0.10",
                 "symfony/var-dumper": "~7.2.3",
                 "vimeo/psalm": "~6.9.4"
             },
@@ -8212,7 +8212,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-22T21:23:51+00:00"
+            "time": "2025-03-23T18:33:15+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -10398,16 +10398,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.5.14",
+            "version": "11.5.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9d6046153c2893b521784069e6b5249ce7d2acae"
+                "reference": "4b6a4ee654e5e0c5e1f17e2f83c0f4c91dee1f9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9d6046153c2893b521784069e6b5249ce7d2acae",
-                "reference": "9d6046153c2893b521784069e6b5249ce7d2acae",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4b6a4ee654e5e0c5e1f17e2f83c0f4c91dee1f9c",
+                "reference": "4b6a4ee654e5e0c5e1f17e2f83c0f4c91dee1f9c",
                 "shasum": ""
             },
             "require": {
@@ -10479,7 +10479,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.14"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.15"
             },
             "funding": [
                 {
@@ -10495,7 +10495,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-19T13:45:48+00:00"
+            "time": "2025-03-23T16:02:11+00:00"
         },
         {
             "name": "psy/psysh",
