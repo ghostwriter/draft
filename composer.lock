@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "81d355c6c0b22fac62392817cbdb562b",
+    "content-hash": "f205b3fa9caf2052461b22511b990f94",
     "packages": [
         {
             "name": "brick/math",
@@ -1431,16 +1431,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.3.0",
+            "version": "v12.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "ca0412e978f78ecea0cafbe34dd8b18010064f73"
+                "reference": "9e39df5f865f40f6c582dc2345bb93a20c503f95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ca0412e978f78ecea0cafbe34dd8b18010064f73",
-                "reference": "ca0412e978f78ecea0cafbe34dd8b18010064f73",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/9e39df5f865f40f6c582dc2345bb93a20c503f95",
+                "reference": "9e39df5f865f40f6c582dc2345bb93a20c503f95",
                 "shasum": ""
             },
             "require": {
@@ -1642,7 +1642,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-03-18T13:49:19+00:00"
+            "time": "2025-03-29T17:27:28+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -8062,12 +8062,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "242b2119d1a0e6dbbb043ab6151aaab64f99ecdf"
+                "reference": "92c8255f7a9443fdee3a9d8a7de22cfc262686d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/242b2119d1a0e6dbbb043ab6151aaab64f99ecdf",
-                "reference": "242b2119d1a0e6dbbb043ab6151aaab64f99ecdf",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/92c8255f7a9443fdee3a9d8a7de22cfc262686d5",
+                "reference": "92c8255f7a9443fdee3a9d8a7de22cfc262686d5",
                 "shasum": ""
             },
             "require": {
@@ -8097,25 +8097,26 @@
                 "ext-xml": "*",
                 "ext-xmlwriter": "*",
                 "ext-zlib": "*",
-                "infection/infection": "~0.29.14",
+                "fakerphp/faker": "~1.24.1",
+                "ghostwriter/case-converter": "~2.1.0",
+                "ghostwriter/container": "~5.0.1",
+                "ghostwriter/event-dispatcher": "~5.0.3",
+                "ghostwriter/filesystem": "~0.1.1",
+                "ghostwriter/json": "~3.0.0",
+                "ghostwriter/shell": "~0.1.0",
                 "mockery/mockery": "~1.6.12",
+                "nikic/php-parser": "~5.4.0",
                 "php": "^8.4",
                 "phpunit/phpunit": "~11.5.14 || ~12.0.10",
                 "symfony/var-dumper": "~7.2.3",
-                "vimeo/psalm": "~6.9.4"
+                "vimeo/psalm": "~6.9.6"
             },
             "conflict": {
                 "pestphp/pest": "*",
                 "phpunit/phpunit": "<11.5.14"
             },
             "require-dev": {
-                "doctrine/inflector": "~2.0.10",
-                "ghostwriter/case-converter": "~2.1.0",
-                "ghostwriter/container": "~5.0.1",
-                "ghostwriter/event-dispatcher": "~5.0.3",
-                "ghostwriter/filesystem": "~0.1.1",
-                "ghostwriter/json": "~3.0.0",
-                "ghostwriter/shell": "~0.1.0"
+                "ghostwriter/inflector": "@dev"
             },
             "default-branch": true,
             "bin": [
@@ -8212,7 +8213,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-24T03:05:38+00:00"
+            "time": "2025-03-30T07:34:15+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -12626,16 +12627,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "6.9.4",
+            "version": "6.9.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "e052de4275fb6cdbfedfef1d883a7e90732ea609"
+                "reference": "61488aa2849793acfb72411829d114b4aa670941"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/e052de4275fb6cdbfedfef1d883a7e90732ea609",
-                "reference": "e052de4275fb6cdbfedfef1d883a7e90732ea609",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/61488aa2849793acfb72411829d114b4aa670941",
+                "reference": "61488aa2849793acfb72411829d114b4aa670941",
                 "shasum": ""
             },
             "require": {
@@ -12740,7 +12741,7 @@
                 "issues": "https://github.com/vimeo/psalm/issues",
                 "source": "https://github.com/vimeo/psalm"
             },
-            "time": "2025-03-20T13:21:28+00:00"
+            "time": "2025-03-27T19:06:48+00:00"
         }
     ],
     "aliases": [],
