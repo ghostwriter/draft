@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6647962d036b55b4f0cba06875bd4fed",
+    "content-hash": "a62eb5056691c9d5c6dfe4d2c0ba8610",
     "packages": [
         {
             "name": "brick/math",
@@ -1431,16 +1431,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.5.0",
+            "version": "v12.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "0ab4791b2c5f405f8728e4481265599803564c02"
+                "reference": "0219fdf28b749460e2f9ebd4e283a00d58b8f758"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/0ab4791b2c5f405f8728e4481265599803564c02",
-                "reference": "0ab4791b2c5f405f8728e4481265599803564c02",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0219fdf28b749460e2f9ebd4e283a00d58b8f758",
+                "reference": "0219fdf28b749460e2f9ebd4e283a00d58b8f758",
                 "shasum": ""
             },
             "require": {
@@ -1642,7 +1642,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-04-01T14:40:42+00:00"
+            "time": "2025-04-02T16:25:03+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -8062,12 +8062,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "31edd1276f85e29f5c0ec78b2bb98b01b45bd7d2"
+                "reference": "646ec28ad9a3c31e36d98515314916fdd4486ae1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/31edd1276f85e29f5c0ec78b2bb98b01b45bd7d2",
-                "reference": "31edd1276f85e29f5c0ec78b2bb98b01b45bd7d2",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/646ec28ad9a3c31e36d98515314916fdd4486ae1",
+                "reference": "646ec28ad9a3c31e36d98515314916fdd4486ae1",
                 "shasum": ""
             },
             "require": {
@@ -8213,7 +8213,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-02T15:32:32+00:00"
+            "time": "2025-04-03T11:23:05+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
