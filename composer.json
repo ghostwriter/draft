@@ -46,17 +46,16 @@
         "ghostwriter/filesystem": "~0.1.1",
         "ghostwriter/json": "~3.0.0",
         "ghostwriter/shell": "~0.1.0",
-        "laravel/framework": "~12.7.0 || ~12.8.1",
-        "livewire/livewire": "~3.6.2",
+        "laravel/framework": "~12.8.1 || ~12.9.0",
+        "livewire/livewire": "~3.6.3",
         "nikic/php-parser": "~5.4.0"
     },
     "require-dev": {
         "ghostwriter/coding-standard": "dev-main",
         "infection/infection": "@stable || ~0.29.14",
-        "livewire/flux": "@stable || ~2.1.2",
-        "orchestra/testbench": "@stable || ~10.1.0 || ~10.2.0"
+        "livewire/flux": "@stable || ~2.1.4",
+        "orchestra/testbench": "@stable || ~10.1.0 || ~10.2.1"
     },
-    "conflict": {},
     "minimum-stability": "stable",
     "prefer-stable": true,
     "autoload": {
