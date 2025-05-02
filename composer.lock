@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "128491c91fd86043bae6c8f52ea03143",
+    "content-hash": "9cc4d00636d4e5f17dbd00cc8117bc1e",
     "packages": [
         {
             "name": "brick/math",
@@ -1431,16 +1431,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.11.1",
+            "version": "v12.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "bd0d62bd9c5196728e428cd695d89ec8640daac1"
+                "reference": "8f6cd73696068c28f30f5964556ec9d14e5d90d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/bd0d62bd9c5196728e428cd695d89ec8640daac1",
-                "reference": "bd0d62bd9c5196728e428cd695d89ec8640daac1",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/8f6cd73696068c28f30f5964556ec9d14e5d90d7",
+                "reference": "8f6cd73696068c28f30f5964556ec9d14e5d90d7",
                 "shasum": ""
             },
             "require": {
@@ -1642,7 +1642,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-04-30T13:48:39+00:00"
+            "time": "2025-05-01T16:13:12+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -7020,12 +7020,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "06dce933566728f684dbcd7092e742792f5e7059"
+                "reference": "62682a1b2e6687a3d61f165419b5b49d457e7d29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/06dce933566728f684dbcd7092e742792f5e7059",
-                "reference": "06dce933566728f684dbcd7092e742792f5e7059",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/62682a1b2e6687a3d61f165419b5b49d457e7d29",
+                "reference": "62682a1b2e6687a3d61f165419b5b49d457e7d29",
                 "shasum": ""
             },
             "require": {
@@ -7070,7 +7070,7 @@
             "require-dev": {
                 "mockery/mockery": "~1.6.12",
                 "nikic/php-parser": "~5.4.0",
-                "phpunit/phpunit": "~12.1.3",
+                "phpunit/phpunit": "~12.1.4",
                 "vimeo/psalm": "~6.10.1"
             },
             "default-branch": true,
@@ -7168,7 +7168,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-30T20:55:23+00:00"
+            "time": "2025-05-02T16:09:43+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -7800,16 +7800,16 @@
         },
         {
             "name": "livewire/flux",
-            "version": "v2.1.5",
+            "version": "v2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/flux.git",
-                "reference": "e24f05be20fa1a0ca027a11c2eea763cc539c82e"
+                "reference": "142429b12718f87dbd1763c4cb2966b532bc8942"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/flux/zipball/e24f05be20fa1a0ca027a11c2eea763cc539c82e",
-                "reference": "e24f05be20fa1a0ca027a11c2eea763cc539c82e",
+                "url": "https://api.github.com/repos/livewire/flux/zipball/142429b12718f87dbd1763c4cb2966b532bc8942",
+                "reference": "142429b12718f87dbd1763c4cb2966b532bc8942",
                 "shasum": ""
             },
             "require": {
@@ -7857,9 +7857,9 @@
             ],
             "support": {
                 "issues": "https://github.com/livewire/flux/issues",
-                "source": "https://github.com/livewire/flux/tree/v2.1.5"
+                "source": "https://github.com/livewire/flux/tree/v2.1.6"
             },
-            "time": "2025-04-24T22:52:25+00:00"
+            "time": "2025-05-01T20:27:37+00:00"
         },
         {
             "name": "marc-mabe/php-enum",
