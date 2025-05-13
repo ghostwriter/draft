@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "df72d5cc768fd976d2ba7e2ddf7bea8a",
+    "content-hash": "8a871050f4c2d20baf4c3d4806cab14c",
     "packages": [
         {
             "name": "brick/math",
@@ -1431,16 +1431,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.13.0",
+            "version": "v12.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "52b588bcd8efc6d01bc1493d2d67848f8065f269"
+                "reference": "d0a0132a3c84c3c7d5737214dd824dd8fff3cf16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/52b588bcd8efc6d01bc1493d2d67848f8065f269",
-                "reference": "52b588bcd8efc6d01bc1493d2d67848f8065f269",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d0a0132a3c84c3c7d5737214dd824dd8fff3cf16",
+                "reference": "d0a0132a3c84c3c7d5737214dd824dd8fff3cf16",
                 "shasum": ""
             },
             "require": {
@@ -1642,7 +1642,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-05-07T17:29:01+00:00"
+            "time": "2025-05-13T14:27:37+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -5025,7 +5025,7 @@
         },
         {
             "name": "symfony/polyfill-php83",
-            "version": "v1.31.0",
+            "version": "v1.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php83.git",
@@ -5081,7 +5081,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php83/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-php83/tree/v1.32.0"
             },
             "funding": [
                 {
@@ -6332,16 +6332,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.8.8",
+            "version": "2.8.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "85ff84d6c5260ba21740a7c5c9a111890805d6e7"
+                "reference": "b4e6bff2db7ce756ddb77ecee958a0f41f42bd9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/85ff84d6c5260ba21740a7c5c9a111890805d6e7",
-                "reference": "85ff84d6c5260ba21740a7c5c9a111890805d6e7",
+                "url": "https://api.github.com/repos/composer/composer/zipball/b4e6bff2db7ce756ddb77ecee958a0f41f42bd9d",
+                "reference": "b4e6bff2db7ce756ddb77ecee958a0f41f42bd9d",
                 "shasum": ""
             },
             "require": {
@@ -6426,7 +6426,7 @@
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
                 "security": "https://github.com/composer/composer/security/policy",
-                "source": "https://github.com/composer/composer/tree/2.8.8"
+                "source": "https://github.com/composer/composer/tree/2.8.9"
             },
             "funding": [
                 {
@@ -6442,7 +6442,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-04T14:56:46+00:00"
+            "time": "2025-05-13T12:01:37+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -7020,18 +7020,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "cb35a511b0952803277540aab6f7b8243f2cdd3d"
+                "reference": "f6cddd7805c806ae18e21130256e95fd114c7212"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/cb35a511b0952803277540aab6f7b8243f2cdd3d",
-                "reference": "cb35a511b0952803277540aab6f7b8243f2cdd3d",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/f6cddd7805c806ae18e21130256e95fd114c7212",
+                "reference": "f6cddd7805c806ae18e21130256e95fd114c7212",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "~2.6.0",
                 "composer-runtime-api": "~2.2.2",
-                "composer/composer": "~2.8.8",
+                "composer/composer": "~2.8.9",
                 "composer/semver": "~3.4.3",
                 "ext-ctype": "*",
                 "ext-curl": "*",
@@ -7070,7 +7070,7 @@
             "require-dev": {
                 "mockery/mockery": "~1.6.12",
                 "nikic/php-parser": "~5.4.0",
-                "phpunit/phpunit": "~12.1.4",
+                "phpunit/phpunit": "~12.1.5",
                 "vimeo/psalm": "~6.10.3"
             },
             "default-branch": true,
@@ -7168,7 +7168,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-06T12:42:00+00:00"
+            "time": "2025-05-13T17:36:09+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -8448,24 +8448,24 @@
         },
         {
             "name": "orchestra/testbench",
-            "version": "v10.2.2",
+            "version": "v10.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench.git",
-                "reference": "8eeee285cbb5d50023b3efa75bb0c32f6206d709"
+                "reference": "6d0930e33724809a2dbd3c9ecd686295b899e6c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench/zipball/8eeee285cbb5d50023b3efa75bb0c32f6206d709",
-                "reference": "8eeee285cbb5d50023b3efa75bb0c32f6206d709",
+                "url": "https://api.github.com/repos/orchestral/testbench/zipball/6d0930e33724809a2dbd3c9ecd686295b899e6c9",
+                "reference": "6d0930e33724809a2dbd3c9ecd686295b899e6c9",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.2",
                 "fakerphp/faker": "^1.23",
-                "laravel/framework": "^12.3.0",
+                "laravel/framework": "^12.8.0",
                 "mockery/mockery": "^1.6.10",
-                "orchestra/testbench-core": "^10.2.2",
+                "orchestra/testbench-core": "^10.3.0",
                 "orchestra/workbench": "^10.0.6",
                 "php": "^8.2",
                 "phpunit/phpunit": "^11.5.3|^12.0.1",
@@ -8497,45 +8497,45 @@
             ],
             "support": {
                 "issues": "https://github.com/orchestral/testbench/issues",
-                "source": "https://github.com/orchestral/testbench/tree/v10.2.2"
+                "source": "https://github.com/orchestral/testbench/tree/v10.3.0"
             },
-            "time": "2025-04-27T14:52:48+00:00"
+            "time": "2025-05-12T06:36:03+00:00"
         },
         {
             "name": "orchestra/testbench-core",
-            "version": "v10.2.2",
+            "version": "v10.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "beed0fa81c3bb37b67e348d0963a33c5f1933fe5"
+                "reference": "3cacf7bc512665b9eb6d2380bb4433574458a557"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/beed0fa81c3bb37b67e348d0963a33c5f1933fe5",
-                "reference": "beed0fa81c3bb37b67e348d0963a33c5f1933fe5",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/3cacf7bc512665b9eb6d2380bb4433574458a557",
+                "reference": "3cacf7bc512665b9eb6d2380bb4433574458a557",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.2",
-                "orchestra/sidekick": "^1.1.5",
+                "orchestra/sidekick": "^1.1.5|^1.2.0",
                 "php": "^8.2",
                 "symfony/deprecation-contracts": "^2.5|^3.0",
-                "symfony/polyfill-php83": "^1.31"
+                "symfony/polyfill-php83": "^1.32"
             },
             "conflict": {
                 "brianium/paratest": "<7.3.0|>=8.0.0",
-                "laravel/framework": "<12.1.1|>=13.0.0",
+                "laravel/framework": "<12.8.0|>=13.0.0",
                 "laravel/serializable-closure": "<1.3.0|>=2.0.0 <2.0.3|>=3.0.0",
                 "nunomaduro/collision": "<8.0.0|>=9.0.0",
                 "phpunit/phpunit": "<10.5.35|>=11.0.0 <11.5.3|12.0.0|>=12.2.0"
             },
             "require-dev": {
                 "fakerphp/faker": "^1.24",
-                "laravel/framework": "^12.1.1",
+                "laravel/framework": "^12.8.0",
                 "laravel/pint": "^1.22",
                 "laravel/serializable-closure": "^1.3|^2.0.4",
                 "mockery/mockery": "^1.6.10",
-                "phpstan/phpstan": "^2.1.12",
+                "phpstan/phpstan": "^2.1.14",
                 "phpunit/phpunit": "^10.5.35|^11.5.3|^12.0.1",
                 "spatie/laravel-ray": "^1.40.2",
                 "symfony/process": "^7.2.0",
@@ -8546,7 +8546,7 @@
                 "brianium/paratest": "Allow using parallel testing (^7.3).",
                 "ext-pcntl": "Required to use all features of the console signal trapping.",
                 "fakerphp/faker": "Allow using Faker for testing (^1.23).",
-                "laravel/framework": "Required for testing (^12.1.1).",
+                "laravel/framework": "Required for testing (^12.8.0).",
                 "mockery/mockery": "Allow using Mockery for testing (^1.6).",
                 "nunomaduro/collision": "Allow using Laravel style tests output and parallel testing (^8.0).",
                 "orchestra/testbench-dusk": "Allow using Laravel Dusk for testing (^10.0).",
@@ -8592,7 +8592,7 @@
                 "issues": "https://github.com/orchestral/testbench/issues",
                 "source": "https://github.com/orchestral/testbench-core"
             },
-            "time": "2025-04-27T05:36:02+00:00"
+            "time": "2025-05-12T05:41:57+00:00"
         },
         {
             "name": "orchestra/workbench",
