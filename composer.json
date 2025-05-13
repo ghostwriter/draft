@@ -46,7 +46,7 @@
         "ghostwriter/filesystem": "~0.1.1",
         "ghostwriter/json": "~3.0.0",
         "ghostwriter/shell": "~0.1.0",
-        "laravel/framework": "~12.12.0 || ~12.13.0",
+        "laravel/framework": "~12.13.0 || ~12.14.0",
         "livewire/livewire": "~3.6.3",
         "nikic/php-parser": "~5.4.0"
     },
@@ -54,7 +54,7 @@
         "ghostwriter/coding-standard": "dev-main",
         "infection/infection": "@stable || ~0.29.14",
         "livewire/flux": "@stable || ~2.1.6",
-        "orchestra/testbench": "@stable || ~10.1.0 || ~10.2.2"
+        "orchestra/testbench": "@stable || ~10.2.2 || ~10.3.0"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
