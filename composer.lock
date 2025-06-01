@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31464dfe7f602a6180964d188548bf3e",
+    "content-hash": "561a206fa639285c4469bde198567410",
     "packages": [
         {
             "name": "brick/math",
@@ -2750,16 +2750,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.4.0",
+            "version": "v5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494"
+                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/447a020a1f875a434d62f2a401f53b82a396e494",
-                "reference": "447a020a1f875a434d62f2a401f53b82a396e494",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ae59794362fe85e051a58ad36b289443f57be7a9",
+                "reference": "ae59794362fe85e051a58ad36b289443f57be7a9",
                 "shasum": ""
             },
             "require": {
@@ -2802,9 +2802,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.4.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.5.0"
             },
-            "time": "2024-12-30T11:07:19+00:00"
+            "time": "2025-05-31T08:24:38+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -7020,12 +7020,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "f244be19f1e0764009f18655cac041a0335bcc81"
+                "reference": "9e264c8e9f75160be53b98af7f92e02f38499bce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/f244be19f1e0764009f18655cac041a0335bcc81",
-                "reference": "f244be19f1e0764009f18655cac041a0335bcc81",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/9e264c8e9f75160be53b98af7f92e02f38499bce",
+                "reference": "9e264c8e9f75160be53b98af7f92e02f38499bce",
                 "shasum": ""
             },
             "require": {
@@ -7069,9 +7069,9 @@
             },
             "require-dev": {
                 "mockery/mockery": "~1.6.12",
-                "nikic/php-parser": "~5.4.0",
+                "nikic/php-parser": "~5.4.0 || ~5.5.0",
                 "phpunit/phpunit": "~12.1.6",
-                "vimeo/psalm": "~6.10.3 || ~6.11.0"
+                "vimeo/psalm": "~6.11.0 || ~6.12.0"
             },
             "default-branch": true,
             "bin": [
@@ -7168,7 +7168,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-27T12:40:04+00:00"
+            "time": "2025-06-01T17:31:05+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
