@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "561a206fa639285c4469bde198567410",
+    "content-hash": "e15089c65f3f2d61c52ef8416ea9ed9d",
     "packages": [
         {
             "name": "brick/math",
@@ -1431,20 +1431,20 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v12.16.0",
+            "version": "v12.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "293bb1c70224faebfd3d4328e201c37115da055f"
+                "reference": "8729d084510480fdeec9b6ad198180147d4a7f06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/293bb1c70224faebfd3d4328e201c37115da055f",
-                "reference": "293bb1c70224faebfd3d4328e201c37115da055f",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/8729d084510480fdeec9b6ad198180147d4a7f06",
+                "reference": "8729d084510480fdeec9b6ad198180147d4a7f06",
                 "shasum": ""
             },
             "require": {
-                "brick/math": "^0.11|^0.12",
+                "brick/math": "^0.11|^0.12|^0.13",
                 "composer-runtime-api": "^2.2",
                 "doctrine/inflector": "^2.0.5",
                 "dragonmantank/cron-expression": "^3.4",
@@ -1642,7 +1642,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2025-05-27T15:49:44+00:00"
+            "time": "2025-06-03T14:04:18+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -7020,12 +7020,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "9e264c8e9f75160be53b98af7f92e02f38499bce"
+                "reference": "b573476b4e677e8e1a6e4293b96d295b1f415cc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/9e264c8e9f75160be53b98af7f92e02f38499bce",
-                "reference": "9e264c8e9f75160be53b98af7f92e02f38499bce",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/b573476b4e677e8e1a6e4293b96d295b1f415cc6",
+                "reference": "b573476b4e677e8e1a6e4293b96d295b1f415cc6",
                 "shasum": ""
             },
             "require": {
@@ -7168,7 +7168,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-01T17:31:05+00:00"
+            "time": "2025-06-04T16:35:55+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
