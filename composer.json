@@ -40,7 +40,7 @@
         "php": "^8.4",
         "ext-mbstring": "*",
         "doctrine/inflector": "~2.0.10",
-        "ghostwriter/case-converter": "^2.0.0 || ~2.1.0",
+        "ghostwriter/case-converter": "^2.0.0",
         "ghostwriter/container": "~5.0.1",
         "ghostwriter/event-dispatcher": "~5.0.3",
         "ghostwriter/filesystem": "~0.1.1",
@@ -51,10 +51,15 @@
         "nikic/php-parser": "~5.4.0 || ~5.5.0"
     },
     "require-dev": {
+        "ext-xdebug": "*",
         "ghostwriter/coding-standard": "dev-main",
-        "infection/infection": "@stable || ~0.29.14",
-        "livewire/flux": "@stable || ~2.1.6",
-        "orchestra/testbench": "@stable || ~10.2.2 || ~10.3.0"
+        "infection/infection": "~0.29.14 || @stable",
+        "livewire/flux": "~2.1.6 || @stable",
+        "mockery/mockery": "~1.6.12",
+        "orchestra/testbench": "~10.2.2 || ~10.3.0 || @stable",
+        "phpunit/phpunit": "~12.1.0",
+        "symfony/var-dumper": "~7.3.0",
+        "vimeo/psalm": "~6.12.0"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -106,15 +111,13 @@
         "bin_infection": "vendor/ghostwriter/coding-standard/tools/infection --ansi --min-covered-msi=0 --min-msi=0 --show-mutations --threads=max",
         "bin_normalize": "vendor/ghostwriter/coding-standard/tools/composer-normalize",
         "bin_phive": "vendor/ghostwriter/coding-standard/tools/phive",
-        "bin_phpunit": "vendor/ghostwriter/coding-standard/tools/phpunit --do-not-cache-result --colors=always",
+        "bin_phpunit": "vendor/bin/phpunit --do-not-cache-result --colors=always",
         "bin_psalm": "vendor/ghostwriter/coding-standard/tools/psalm --no-cache",
         "bin_rector": "rector process --clear-cache --no-ansi",
         "cache:clear": "rm -rf ./.cache/*",
         "check": [
             "@cache:clear",
             "@bin_composer validate",
-            "@normalize",
-            "@ecs",
             "@test"
         ],
         "composer-normalize": "@bin_normalize --no-cache --diff --no-check-lock --no-scripts --no-plugins",
