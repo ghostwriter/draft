@@ -57,8 +57,7 @@
         "livewire/flux": "~2.1.6 || @stable",
         "mockery/mockery": "~1.6.12",
         "orchestra/testbench": "~10.2.2 || ~10.3.0 || @stable",
-        "phpunit/phpunit": "~12.1.0",
-        "symfony/var-dumper": "~7.3.0",
+        "phpunit/phpunit": "~12.1.6",
         "vimeo/psalm": "~6.12.0"
     },
     "minimum-stability": "stable",
