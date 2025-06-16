@@ -46,7 +46,7 @@
         "ghostwriter/filesystem": "~0.1.1",
         "ghostwriter/json": "~3.0.0",
         "ghostwriter/shell": "~0.1.0",
-        "laravel/framework": "~12.17.0",
+        "laravel/framework": "~12.18.0",
         "livewire/livewire": "~3.6.3",
         "nikic/php-parser": "~5.5.0"
     },
@@ -57,7 +57,7 @@
         "livewire/flux": "@stable || ~2.1.6",
         "mockery/mockery": "~1.6.12",
         "orchestra/testbench": "@stable || ~10.4.0",
-        "phpunit/phpunit": "~12.1.6",
+        "phpunit/phpunit": "~12.2.2",
         "symfony/var-dumper": "~7.3.0",
         "vimeo/psalm": "~6.12.0"
     },
