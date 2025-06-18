@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "08b0505d11666723875ce887f0773f33",
+    "content-hash": "cac2ef737476a93310701ac3f02a0cb3",
     "packages": [
         {
             "name": "brick/math",
@@ -8058,12 +8058,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "80e793697d7129e2bc324cd28805ea04e7ff6592"
+                "reference": "0b8d68ed206eb07b4cbb3e13a3b65b87ead4b403"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/80e793697d7129e2bc324cd28805ea04e7ff6592",
-                "reference": "80e793697d7129e2bc324cd28805ea04e7ff6592",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/0b8d68ed206eb07b4cbb3e13a3b65b87ead4b403",
+                "reference": "0b8d68ed206eb07b4cbb3e13a3b65b87ead4b403",
                 "shasum": ""
             },
             "require": {
@@ -8206,7 +8206,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-16T16:29:01+00:00"
+            "time": "2025-06-17T14:51:20+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -8897,16 +8897,16 @@
         },
         {
             "name": "livewire/flux",
-            "version": "v2.1.6",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/flux.git",
-                "reference": "142429b12718f87dbd1763c4cb2966b532bc8942"
+                "reference": "3621bf6faaa73b560ce17d4e52c65f2303493a12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/flux/zipball/142429b12718f87dbd1763c4cb2966b532bc8942",
-                "reference": "142429b12718f87dbd1763c4cb2966b532bc8942",
+                "url": "https://api.github.com/repos/livewire/flux/zipball/3621bf6faaa73b560ce17d4e52c65f2303493a12",
+                "reference": "3621bf6faaa73b560ce17d4e52c65f2303493a12",
                 "shasum": ""
             },
             "require": {
@@ -8954,9 +8954,9 @@
             ],
             "support": {
                 "issues": "https://github.com/livewire/flux/issues",
-                "source": "https://github.com/livewire/flux/tree/v2.1.6"
+                "source": "https://github.com/livewire/flux/tree/v2.2.1"
             },
-            "time": "2025-05-01T20:27:37+00:00"
+            "time": "2025-06-18T02:02:40+00:00"
         },
         {
             "name": "marc-mabe/php-enum",
