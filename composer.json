@@ -34,7 +34,8 @@
     "_comment": [
         "#BlackLivesMatter",
         "#FreePalestine",
-        "#StandWithUkraine"
+        "#StandWithUkraine",
+        "#StopGenocide"
     ],
     "require": {
         "php": "^8.4",
@@ -53,10 +54,10 @@
     "require-dev": {
         "ext-xdebug": "*",
         "ghostwriter/coding-standard": "dev-main",
-        "infection/infection": "@stable || ~0.29.14",
-        "livewire/flux": "@stable || ~2.2.1",
+        "infection/infection": "~0.29.14 || @stable",
+        "livewire/flux": "~2.2.1 || @stable",
         "mockery/mockery": "~1.6.12",
-        "orchestra/testbench": "@stable || ~10.4.0",
+        "orchestra/testbench": "~10.4.0 || @stable",
         "phpunit/phpunit": "~12.2.2",
         "symfony/var-dumper": "~7.3.0",
         "vimeo/psalm": "~6.12.0"
