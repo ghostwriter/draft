@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "34dd969968da655a139509456b72440e",
+    "content-hash": "de63de8c7dd3799feadb2f0d39fda72a",
     "packages": [
         {
             "name": "brick/math",
@@ -8057,12 +8057,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "f0095e4aac9a239dda00d206aa84c190cacd7ce0"
+                "reference": "8c3323ea254354119bd3928105113856af0808d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/f0095e4aac9a239dda00d206aa84c190cacd7ce0",
-                "reference": "f0095e4aac9a239dda00d206aa84c190cacd7ce0",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/8c3323ea254354119bd3928105113856af0808d7",
+                "reference": "8c3323ea254354119bd3928105113856af0808d7",
                 "shasum": ""
             },
             "require": {
@@ -8206,7 +8206,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-29T11:58:21+00:00"
+            "time": "2025-07-03T22:14:59+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
