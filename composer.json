@@ -38,7 +38,7 @@
         "#StopGenocide"
     ],
     "require": {
-        "php": "^8.4",
+        "php": "~8.4.0",
         "ext-mbstring": "*",
         "ghostwriter/case-converter": "~2.1.0",
         "ghostwriter/container": "~5.0.1",
