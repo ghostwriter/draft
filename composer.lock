@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f601503a99e05721d5340001691c1761",
+    "content-hash": "030f91ff13f44330488a1041c8f162fd",
     "packages": [
         {
             "name": "brick/math",
@@ -8899,16 +8899,16 @@
         },
         {
             "name": "livewire/flux",
-            "version": "v2.2.1",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/flux.git",
-                "reference": "3621bf6faaa73b560ce17d4e52c65f2303493a12"
+                "reference": "a995f9513b9eb48b05c8431fe881efa4c6219513"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/flux/zipball/3621bf6faaa73b560ce17d4e52c65f2303493a12",
-                "reference": "3621bf6faaa73b560ce17d4e52c65f2303493a12",
+                "url": "https://api.github.com/repos/livewire/flux/zipball/a995f9513b9eb48b05c8431fe881efa4c6219513",
+                "reference": "a995f9513b9eb48b05c8431fe881efa4c6219513",
                 "shasum": ""
             },
             "require": {
@@ -8956,9 +8956,9 @@
             ],
             "support": {
                 "issues": "https://github.com/livewire/flux/issues",
-                "source": "https://github.com/livewire/flux/tree/v2.2.1"
+                "source": "https://github.com/livewire/flux/tree/v2.2.2"
             },
-            "time": "2025-06-18T02:02:40+00:00"
+            "time": "2025-07-08T07:13:42+00:00"
         },
         {
             "name": "marc-mabe/php-enum",
