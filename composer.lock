@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d4bab53b9b92dc109802b2c87f5dbb0",
+    "content-hash": "5164a79fe1bfe94b3dd6e5c28e33c9b6",
     "packages": [
         {
             "name": "brick/math",
@@ -8057,12 +8057,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "13fd1073fa6bb72971db5eac7cb1519744fb3fc2"
+                "reference": "2243bc6704b55e2a090c3217b394de5dd7e347a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/13fd1073fa6bb72971db5eac7cb1519744fb3fc2",
-                "reference": "13fd1073fa6bb72971db5eac7cb1519744fb3fc2",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/2243bc6704b55e2a090c3217b394de5dd7e347a2",
+                "reference": "2243bc6704b55e2a090c3217b394de5dd7e347a2",
                 "shasum": ""
             },
             "require": {
@@ -8106,10 +8106,12 @@
             },
             "require-dev": {
                 "ext-xdebug": "*",
+                "infection/infection": "~0.30.3",
                 "mockery/mockery": "~1.6.12",
                 "nikic/php-parser": "~5.4.0 || ~5.5.0",
                 "phpunit/phpunit": "~12.2.7",
-                "vimeo/psalm": "~6.12.1"
+                "symfony/var-dumper": "~7.3.1",
+                "vimeo/psalm": "~6.13.0"
             },
             "default-branch": true,
             "bin": [
@@ -8206,7 +8208,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-13T08:10:12+00:00"
+            "time": "2025-07-14T11:45:32+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
