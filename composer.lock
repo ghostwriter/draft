@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e50d582e13d33ab7081162d7bb4e5639",
+    "content-hash": "5964e14f207880f257782a1fd7a06e12",
     "packages": [
         {
             "name": "brick/math",
@@ -2496,16 +2496,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "3.10.1",
+            "version": "3.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CarbonPHP/carbon.git",
-                "reference": "1fd1935b2d90aef2f093c5e35f7ae1257c448d00"
+                "reference": "76b5c07b8a9d2025ed1610e14cef1f3fd6ad2c24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/1fd1935b2d90aef2f093c5e35f7ae1257c448d00",
-                "reference": "1fd1935b2d90aef2f093c5e35f7ae1257c448d00",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/76b5c07b8a9d2025ed1610e14cef1f3fd6ad2c24",
+                "reference": "76b5c07b8a9d2025ed1610e14cef1f3fd6ad2c24",
                 "shasum": ""
             },
             "require": {
@@ -2597,7 +2597,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-21T15:19:35+00:00"
+            "time": "2025-08-02T09:36:06+00:00"
         },
         {
             "name": "nette/schema",
@@ -8100,12 +8100,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "fc3b92cddc65c83563433d7b9e874dccfa3021c9"
+                "reference": "a8f9dae205f36ca017029cd1b3cd4f47dcdc0b72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/fc3b92cddc65c83563433d7b9e874dccfa3021c9",
-                "reference": "fc3b92cddc65c83563433d7b9e874dccfa3021c9",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/a8f9dae205f36ca017029cd1b3cd4f47dcdc0b72",
+                "reference": "a8f9dae205f36ca017029cd1b3cd4f47dcdc0b72",
                 "shasum": ""
             },
             "require": {
@@ -8149,7 +8149,7 @@
             },
             "require-dev": {
                 "ext-xdebug": "*",
-                "infection/infection": "~0.31.0",
+                "infection/infection": "~0.31.1",
                 "mockery/mockery": "~1.6.12",
                 "nikic/php-parser": "~5.6.0",
                 "phpunit/phpunit": "~12.3.0",
@@ -8251,7 +8251,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-01T10:57:31+00:00"
+            "time": "2025-08-04T14:49:07+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -10643,16 +10643,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.12.9",
+            "version": "v0.12.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "1b801844becfe648985372cb4b12ad6840245ace"
+                "reference": "6e80abe6f2257121f1eb9a4c55bf29d921025b22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/1b801844becfe648985372cb4b12ad6840245ace",
-                "reference": "1b801844becfe648985372cb4b12ad6840245ace",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/6e80abe6f2257121f1eb9a4c55bf29d921025b22",
+                "reference": "6e80abe6f2257121f1eb9a4c55bf29d921025b22",
                 "shasum": ""
             },
             "require": {
@@ -10702,12 +10702,11 @@
             "authors": [
                 {
                     "name": "Justin Hileman",
-                    "email": "justin@justinhileman.info",
-                    "homepage": "http://justinhileman.com"
+                    "email": "justin@justinhileman.info"
                 }
             ],
             "description": "An interactive shell for modern PHP.",
-            "homepage": "http://psysh.org",
+            "homepage": "https://psysh.org",
             "keywords": [
                 "REPL",
                 "console",
@@ -10716,9 +10715,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.12.9"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.12.10"
             },
-            "time": "2025-06-23T02:35:06+00:00"
+            "time": "2025-08-04T12:39:37+00:00"
         },
         {
             "name": "react/promise",
@@ -10867,21 +10866,21 @@
         },
         {
             "name": "sanmai/di-container",
-            "version": "0.1.4",
+            "version": "0.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sanmai/di-container.git",
-                "reference": "7141a28f33d72dd7a9e3148e32a8b54b93050453"
+                "reference": "355534ad7970fc7dab4211ecaf2da5c546855ee8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sanmai/di-container/zipball/7141a28f33d72dd7a9e3148e32a8b54b93050453",
-                "reference": "7141a28f33d72dd7a9e3148e32a8b54b93050453",
+                "url": "https://api.github.com/repos/sanmai/di-container/zipball/355534ad7970fc7dab4211ecaf2da5c546855ee8",
+                "reference": "355534ad7970fc7dab4211ecaf2da5c546855ee8",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
-                "psr/container": "^2.0",
+                "psr/container": "^1.1.2 || ^2.0",
                 "sanmai/pipeline": "^6.17 || ^7.0"
             },
             "require-dev": {
@@ -10921,10 +10920,16 @@
                     "homepage": "https://twitter.com/tfidry"
                 }
             ],
-            "description": "Straightforward DI container with autowiring",
+            "description": "dependency injection container with automatic constructor dependency resolution",
+            "keywords": [
+                "Autowiring",
+                "constructor di",
+                "di container",
+                "psr 11"
+            ],
             "support": {
                 "issues": "https://github.com/sanmai/di-container/issues",
-                "source": "https://github.com/sanmai/di-container/tree/0.1.4"
+                "source": "https://github.com/sanmai/di-container/tree/0.1.5"
             },
             "funding": [
                 {
@@ -10932,7 +10937,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-07-24T03:40:49+00:00"
+            "time": "2025-08-04T09:43:58+00:00"
         },
         {
             "name": "sanmai/duoclock",
