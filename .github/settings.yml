@@ -3,7 +3,6 @@
   "description": "[WIP] A code generation tool for Laravel developers"
   "homepage": "https://github.com/ghostwriter/draft"
   "topics": "code-generator, dev, draft, ghostwriter, laravel, php"
-  "private": false
   "has_issues": true
   "has_projects": false
   "has_wiki": false
