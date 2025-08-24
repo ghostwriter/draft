@@ -54,9 +54,9 @@
         "ext-xdebug": "*",
         "ghostwriter/coding-standard": "dev-main",
         "infection/infection": "~0.31.1",
-        "livewire/flux": "@stable || ~2.2.3",
+        "livewire/flux": "~2.2.3 || @stable",
         "mockery/mockery": "~1.6.12",
-        "orchestra/testbench": "@stable || ~10.4.0",
+        "orchestra/testbench": "~10.4.0 || @stable",
         "phpunit/phpunit": "~12.3.0",
         "symfony/var-dumper": "~7.3.2",
         "vimeo/psalm": "~6.13.1"
@@ -81,8 +81,7 @@
     },
     "config": {
         "allow-plugins": {
-            "ghostwriter/coding-standard": true,
-            "infection/extension-installer": true
+            "ghostwriter/coding-standard": true
         },
         "bump-after-update": false,
         "classmap-authoritative": false,
