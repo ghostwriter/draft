@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19623b1db64b0f37c4c47d4d11df75b6",
+    "content-hash": "ea8e0082fd1771c72297e023493982aa",
     "packages": [
         {
             "name": "brick/math",
@@ -10073,22 +10073,22 @@
         },
         {
             "name": "orchestra/testbench",
-            "version": "v10.5.0",
+            "version": "v10.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench.git",
-                "reference": "565782414c582d5025671c5789c2b75e1e2a7601"
+                "reference": "87a7cb58edcfea9b1f26a63761c4d7ed5448f560"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench/zipball/565782414c582d5025671c5789c2b75e1e2a7601",
-                "reference": "565782414c582d5025671c5789c2b75e1e2a7601",
+                "url": "https://api.github.com/repos/orchestral/testbench/zipball/87a7cb58edcfea9b1f26a63761c4d7ed5448f560",
+                "reference": "87a7cb58edcfea9b1f26a63761c4d7ed5448f560",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.2",
                 "fakerphp/faker": "^1.23",
-                "laravel/framework": "^12.8.0",
+                "laravel/framework": "^12.24.0",
                 "mockery/mockery": "^1.6.10",
                 "orchestra/testbench-core": "^10.6.1",
                 "orchestra/workbench": "^10.0.6",
@@ -10122,9 +10122,9 @@
             ],
             "support": {
                 "issues": "https://github.com/orchestral/testbench/issues",
-                "source": "https://github.com/orchestral/testbench/tree/v10.5.0"
+                "source": "https://github.com/orchestral/testbench/tree/v10.6.0"
             },
-            "time": "2025-08-20T11:46:17+00:00"
+            "time": "2025-08-20T14:38:08+00:00"
         },
         {
             "name": "orchestra/testbench-core",
@@ -13332,8 +13332,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "ghostwriter/coding-standard": 20,
-        "livewire/flux": 0,
-        "orchestra/testbench": 0
+        "livewire/flux": 0
     },
     "prefer-stable": true,
     "prefer-lowest": false,
