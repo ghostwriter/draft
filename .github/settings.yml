@@ -6,10 +6,10 @@
     "description": "Major release – targeting 1.0.x branch (semantic version: 1.0.0)"
     "state": "open"
 "repository":
-  "name": "draft"
+  "name": "laravel-draft"
   "description": "[WIP] A code generation tool for Laravel developers"
-  "topics": "code-generator, dev, draft, ghostwriter, laravel, php"
-  "homepage": "https://github.com/ghostwriter/draft"
+  "topics": "code-generator, dev, draft, ghostwriter, laravel, laravel-draft, php"
+  "homepage": "https://github.com/ghostwriter/laravel-draft"
   "default_branch": "0.1.x"
   "allow_auto_merge": true
   "allow_forking": true
