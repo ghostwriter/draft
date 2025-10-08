@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "043ed5e857c0875c65fe82ce95cae16c",
+    "content-hash": "24c9064f29dfc259a865cbbd215e2566",
     "packages": [
         {
             "name": "brick/math",
@@ -7767,7 +7767,7 @@
         },
         {
             "name": "livewire/flux",
-            "version": "v2.5.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/flux.git",
@@ -7827,7 +7827,7 @@
             ],
             "support": {
                 "issues": "https://github.com/livewire/flux/issues",
-                "source": "https://github.com/livewire/flux/tree/v2.5.0"
+                "source": "https://github.com/livewire/flux/tree/v2.5.1"
             },
             "time": "2025-09-29T21:36:00+00:00"
         },
