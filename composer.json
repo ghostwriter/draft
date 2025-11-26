@@ -95,9 +95,11 @@
     },
     "extra": {
         "laravel": {
-            "providers": [
-                "Ghostwriter\\Draft\\DraftServiceProvider"
-            ]
+            "providers": ["Ghostwriter\\Draft\\DraftServiceProvider"]
+        },
+        "thanks": {
+            "url": "https://github.com/ghostwriter/draft",
+            "name": "ghostwriter/draft"
         }
     },
     "scripts": {
