@@ -53,7 +53,7 @@
     "require-dev": {
         "ext-xdebug": "*",
         "ghostwriter/coding-standard": "dev-main",
-        "livewire/flux": "^2.6.1",
+        "livewire/flux": "^2.9.0",
         "mockery/mockery": "^1.6.12",
         "orchestra/testbench": "^10.8.0",
         "phpunit/phpunit": "^12.4.3",
