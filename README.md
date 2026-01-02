@@ -1,9 +1,9 @@
-# Laravel Draft
+# Draft
 
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/ghostwriter?label=Sponsor+@ghostwriter/laravel-draft&logo=GitHub+Sponsors)](https://github.com/sponsors/ghostwriter)
-[![Automation](https://github.com/ghostwriter/laravel-draft/actions/workflows/automation.yml/badge.svg)](https://github.com/ghostwriter/laravel-draft/actions/workflows/automation.yml)
-[![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/laravel-draft?color=8892bf)](https://www.php.net/supported-versions)
-[![Downloads](https://badgen.net/packagist/dt/ghostwriter/laravel-draft?color=blue)](https://packagist.org/packages/ghostwriter/laravel-draft)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/ghostwriter?label=Sponsor+@ghostwriter/draft&logo=GitHub+Sponsors)](https://github.com/sponsors/ghostwriter)
+[![Automation](https://github.com/ghostwriter/draft/actions/workflows/automation.yml/badge.svg)](https://github.com/ghostwriter/draft/actions/workflows/automation.yml)
+[![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/draft?color=8892bf)](https://www.php.net/supported-versions)
+[![Downloads](https://badgen.net/packagist/dt/ghostwriter/draft?color=blue)](https://packagist.org/packages/ghostwriter/draft)
 
 A code generation tool for Laravel developers.
 
