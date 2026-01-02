@@ -19,9 +19,9 @@ Fork the project on GitHub and check out your copy locally.
 ## Step 2: Clone the repository
 
 ```bash
-git clone git@github.com:ghostwriter/laravel-draft.git
-cd laravel-draft
-git remote add upstream git://github.com/ghostwriter/laravel-draft.git
+git clone git@github.com:ghostwriter/draft.git
+cd draft
+git remote add upstream git://github.com/ghostwriter/draft.git
 ```
 
 # Step 3: Branch
