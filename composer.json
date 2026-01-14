@@ -55,7 +55,7 @@
         "ghostwriter/coding-standard": "dev-main",
         "livewire/flux": "^2.10.2",
         "mockery/mockery": "^1.6.12",
-        "orchestra/testbench": "^10.8.0",
+        "orchestra/testbench": "^10.9.0",
         "phpunit/phpunit": "^12.4.5",
         "symfony/var-dumper": "^7.3.5"
     },
