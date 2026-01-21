@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "30bbc98e32663512f10945f8169e82c6",
+    "content-hash": "9c71d137d75374f08f502509e3f9d22a",
     "packages": [
         {
             "name": "brick/math",
@@ -7570,16 +7570,16 @@
         },
         {
             "name": "livewire/flux",
-            "version": "v2.10.2",
+            "version": "v2.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/flux.git",
-                "reference": "e7a93989788429bb6c0a908a056d22ea3a6c7975"
+                "reference": "163fd7333468d527153da6100f3c8e8e402a8f90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/flux/zipball/e7a93989788429bb6c0a908a056d22ea3a6c7975",
-                "reference": "e7a93989788429bb6c0a908a056d22ea3a6c7975",
+                "url": "https://api.github.com/repos/livewire/flux/zipball/163fd7333468d527153da6100f3c8e8e402a8f90",
+                "reference": "163fd7333468d527153da6100f3c8e8e402a8f90",
                 "shasum": ""
             },
             "require": {
@@ -7587,7 +7587,7 @@
                 "illuminate/support": "^10.0|^11.0|^12.0",
                 "illuminate/view": "^10.0|^11.0|^12.0",
                 "laravel/prompts": "^0.1|^0.2|^0.3",
-                "livewire/livewire": "^3.7.3|^4.0",
+                "livewire/livewire": "^3.7.4|^4.0",
                 "php": "^8.1",
                 "symfony/console": "^6.0|^7.0"
             },
@@ -7630,9 +7630,9 @@
             ],
             "support": {
                 "issues": "https://github.com/livewire/flux/issues",
-                "source": "https://github.com/livewire/flux/tree/v2.10.2"
+                "source": "https://github.com/livewire/flux/tree/v2.11.0"
             },
-            "time": "2025-12-19T02:11:45+00:00"
+            "time": "2026-01-21T09:22:09+00:00"
         },
         {
             "name": "marc-mabe/php-enum",
