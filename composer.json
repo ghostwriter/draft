@@ -45,7 +45,7 @@
         "ghostwriter/event-dispatcher": "^5.0.3",
         "ghostwriter/filesystem": "^0.1.2",
         "ghostwriter/json": "^3.0.1",
-        "ghostwriter/shell": "^0.1.1",
+        "ghostwriter/shell": "^0.1.2",
         "laravel/framework": "^12.48.1",
         "livewire/livewire": "^4.0.3",
         "nikic/php-parser": "^5.7.0"
