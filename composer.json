@@ -46,7 +46,7 @@
         "ghostwriter/filesystem": "^0.1.2",
         "ghostwriter/json": "^3.0.1",
         "ghostwriter/shell": "^0.1.4",
-        "laravel/framework": "^12.56.0",
+        "laravel/framework": "^13.2.0",
         "livewire/flux": "^2.13.1",
         "livewire/livewire": "^4.2.2",
         "nikic/php-parser": "^5.7.0"
@@ -55,7 +55,7 @@
         "ext-xdebug": "*",
         "ghostwriter/coding-standard": "dev-main",
         "mockery/mockery": "^1.6.12",
-        "orchestra/testbench": "^10.11.0",
+        "orchestra/testbench": "^11.0.0",
         "phpunit/phpunit": "^12.5 || ^13.0",
         "symfony/var-dumper": "^7.4 || ^8.0"
     },
