@@ -56,7 +56,7 @@
         "ghostwriter/coding-standard": "dev-main",
         "mockery/mockery": "^1.6.12",
         "orchestra/testbench": "^11.0.0",
-        "phpunit/phpunit": "^13.1.0",
+        "phpunit/phpunit": "^13.1.1",
         "symfony/var-dumper": "^8.0.8"
     },
     "prefer-stable": true,
