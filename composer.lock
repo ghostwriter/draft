@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d9d38bcb3e8783d00f481f4f292e1608",
+    "content-hash": "d574ee0f83d5e86f696a60d295f8a0fe",
     "packages": [
         {
             "name": "brick/math",
@@ -8180,25 +8180,25 @@
         },
         {
             "name": "orchestra/testbench",
-            "version": "v11.0.0",
+            "version": "v11.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench.git",
-                "reference": "60efc9e8ec12137a2a7084e9d54c976f78c192f5"
+                "reference": "997f33e5200c7e8db4756b35a9deb3f5f3086759"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench/zipball/60efc9e8ec12137a2a7084e9d54c976f78c192f5",
-                "reference": "60efc9e8ec12137a2a7084e9d54c976f78c192f5",
+                "url": "https://api.github.com/repos/orchestral/testbench/zipball/997f33e5200c7e8db4756b35a9deb3f5f3086759",
+                "reference": "997f33e5200c7e8db4756b35a9deb3f5f3086759",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.2",
                 "fakerphp/faker": "^1.23",
-                "laravel/framework": "^13.0.0",
+                "laravel/framework": "^13.1.1",
                 "mockery/mockery": "^1.6.10",
-                "orchestra/testbench-core": "^11.0.0",
-                "orchestra/workbench": "^11.0.0",
+                "orchestra/testbench-core": "^11.2.0",
+                "orchestra/workbench": "^11.0.1",
                 "php": "^8.3",
                 "phpunit/phpunit": "^11.5.50|^12.5.8|^13.0.0",
                 "symfony/process": "^7.4.5|^8.0.5",
@@ -8229,9 +8229,9 @@
             ],
             "support": {
                 "issues": "https://github.com/orchestral/testbench/issues",
-                "source": "https://github.com/orchestral/testbench/tree/v11.0.0"
+                "source": "https://github.com/orchestral/testbench/tree/v11.1.0"
             },
-            "time": "2026-03-16T15:02:09+00:00"
+            "time": "2026-04-09T05:11:06+00:00"
         },
         {
             "name": "orchestra/testbench-core",
