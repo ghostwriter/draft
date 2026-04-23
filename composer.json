@@ -42,7 +42,7 @@
         "ghostwriter/json": "^3.0.2",
         "ghostwriter/shell": "^0.1.5",
         "laravel/framework": "^13.6.0",
-        "livewire/flux": "^2.13.2",
+        "livewire/flux": "^2.14.0",
         "livewire/livewire": "^4.2.4",
         "nikic/php-parser": "^5.7.0"
     },
