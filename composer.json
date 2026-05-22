@@ -48,7 +48,7 @@
     },
     "require-dev": {
         "ext-xdebug": "*",
-        "boundwize/structarmed": "^0.7.4",
+        "boundwize/structarmed": "^0.7.5",
         "ghostwriter/coding-standard": "dev-main",
         "mockery/mockery": "^1.6.12",
         "orchestra/testbench": "^11.1.0",
