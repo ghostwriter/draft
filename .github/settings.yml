@@ -8,12 +8,7 @@
 "repository":
   "name": "draft"
   "description": "[WIP] A code generation tool for Laravel developers"
-  "topics":
-    - "ghostwriter"
-    - "draft"
-    - "php"
-    - "laravel"
-    - "dev"
+  "topics": "ghostwriter, draft, php, laravel, dev"
   "homepage": "https://github.com/ghostwriter/draft"
   "default_branch": "0.1.x"
   "allow_auto_merge": true
