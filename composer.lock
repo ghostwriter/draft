@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f31336454792d48314b9375b9f50c00f",
+    "content-hash": "b480f1eeffc4f4af1cc455d865ce52d8",
     "packages": [
         {
             "name": "brick/math",
@@ -6472,16 +6472,16 @@
     "packages-dev": [
         {
             "name": "boundwize/structarmed",
-            "version": "0.8.6",
+            "version": "0.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boundwize/structarmed.git",
-                "reference": "6db298b5bd6185f61cc6df50e98a9ce64ed2828f"
+                "reference": "9087dab7d4eef5784e54cc0ad6dfc85ed8b88971"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boundwize/structarmed/zipball/6db298b5bd6185f61cc6df50e98a9ce64ed2828f",
-                "reference": "6db298b5bd6185f61cc6df50e98a9ce64ed2828f",
+                "url": "https://api.github.com/repos/boundwize/structarmed/zipball/9087dab7d4eef5784e54cc0ad6dfc85ed8b88971",
+                "reference": "9087dab7d4eef5784e54cc0ad6dfc85ed8b88971",
                 "shasum": ""
             },
             "require": {
@@ -6534,7 +6534,7 @@
             ],
             "support": {
                 "issues": "https://github.com/boundwize/structarmed/issues",
-                "source": "https://github.com/boundwize/structarmed/tree/0.8.6"
+                "source": "https://github.com/boundwize/structarmed/tree/0.9.0"
             },
             "funding": [
                 {
@@ -6542,7 +6542,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-05-29T01:54:57+00:00"
+            "time": "2026-05-29T14:18:06+00:00"
         },
         {
             "name": "composer/semver",
