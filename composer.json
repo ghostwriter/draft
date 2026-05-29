@@ -55,7 +55,7 @@
         "mockery/mockery": "^1.6.12",
         "orchestra/testbench": "^11.1.0",
         "phpunit/phpunit": "^13.1.12",
-        "symfony/var-dumper": "^8.0.8"
+        "symfony/var-dumper": "^8.1.0"
     },
     "prefer-stable": true,
     "autoload": {
