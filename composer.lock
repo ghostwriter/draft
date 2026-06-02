@@ -7957,16 +7957,16 @@
         },
         {
             "name": "orchestra/testbench-core",
-            "version": "v11.3.3",
+            "version": "v11.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "8b85d7754a08b4ff88fc65ab86edf81d70fd1e26"
+                "reference": "527fe9941b8bdec2914d2a19048b0c40c6c5d87c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/8b85d7754a08b4ff88fc65ab86edf81d70fd1e26",
-                "reference": "8b85d7754a08b4ff88fc65ab86edf81d70fd1e26",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/527fe9941b8bdec2914d2a19048b0c40c6c5d87c",
+                "reference": "527fe9941b8bdec2914d2a19048b0c40c6c5d87c",
                 "shasum": ""
             },
             "require": {
@@ -7978,14 +7978,14 @@
             },
             "conflict": {
                 "brianium/paratest": "<7.3.0|>=8.0.0",
-                "laravel/framework": "<13.9.0|>=14.0.0",
+                "laravel/framework": "<13.10.0|>=14.0.0",
                 "laravel/serializable-closure": ">=2.0.0 <2.0.10|>=3.0.0",
                 "nunomaduro/collision": "<8.9.0|>=9.0.0",
                 "phpunit/phpunit": "<11.5.50|>=12.0.0 <12.5.8|>=13.2.0"
             },
             "require-dev": {
                 "fakerphp/faker": "^1.24",
-                "laravel/framework": "^13.9.0",
+                "laravel/framework": "^13.10.0",
                 "laravel/pint": "^1.24",
                 "laravel/serializable-closure": "^2.0.10",
                 "mockery/mockery": "^1.6.10",
@@ -8046,7 +8046,7 @@
                 "issues": "https://github.com/orchestral/testbench/issues",
                 "source": "https://github.com/orchestral/testbench-core"
             },
-            "time": "2026-05-14T11:22:09+00:00"
+            "time": "2026-06-02T03:43:15+00:00"
         },
         {
             "name": "orchestra/workbench",
