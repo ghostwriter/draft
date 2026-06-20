@@ -13,7 +13,7 @@ use Ghostwriter\Draft\Console\Command\InitCommand;
 use Ghostwriter\Draft\Console\Command\NewCommand;
 use Ghostwriter\Draft\Console\Command\TraceCommand;
 use Ghostwriter\Draft\Draft;
-use Ghostwriter\Draft\DraftServiceProvider;
+use Ghostwriter\Draft\Illuminate\Support\ServiceProvider\DraftServiceProvider;
 use Ghostwriter\Draft\Parser\Node\DraftFileNode;
 use Ghostwriter\Draft\Parser\Printer;
 use Ghostwriter\Draft\Parser\Visitor\DraftVisitor;

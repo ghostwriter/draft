@@ -30,7 +30,6 @@ use Throwable;
 
 use function array_key_exists;
 
-#[Provider(ServiceProvider::class)]
 final class Draft
 {
     public const array RESOURCE_ACTIONS = ['index', 'create', 'edit', 'show', 'store', 'update', 'destroy'];
@@ -63,7 +62,7 @@ final class Draft
 
         $container->call($factory);
 
-        $container->clear();
+        $container->reset();
 
         return $draft;
     }

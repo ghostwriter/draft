@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Draft;
+namespace Ghostwriter\Draft\Illuminate\Support\ServiceProvider;
 
 use Doctrine\Inflector\Inflector;
 use Doctrine\Inflector\InflectorFactory;
@@ -14,21 +14,21 @@ use Ghostwriter\Draft\Console\Command\BuildCommand;
 use Ghostwriter\Draft\Console\Command\InitCommand;
 use Ghostwriter\Draft\Console\Command\NewCommand;
 use Ghostwriter\Draft\Console\Command\TraceCommand;
-// use Illuminate\Container\Container;
 use Ghostwriter\Draft\Parser\Printer;
 use Ghostwriter\Draft\Parser\PrinterInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Support\ServiceProvider;
 use Override;
 use PhpParser\Parser;
 use PhpParser\ParserFactory;
 
-use const DIRECTORY_SEPARATOR;
-
 use function config_path;
 use function dirname;
+
+use const DIRECTORY_SEPARATOR;
+
+// use Illuminate\Container\Container;
 
 final class DraftServiceProvider extends ServiceProvider
 {
@@ -75,7 +75,11 @@ final class DraftServiceProvider extends ServiceProvider
             // Registering package commands.
             $this->commands(self::COMMANDS);
 
-            $this->optimizes(optimize: 'package:optimize', clear: 'package:clear-optimizations');
+            // Registering package optimizations.
+            $this->optimizes(
+                optimize: 'package:optimize',
+                clear: 'package:clear-optimizations'
+            );
         }
 
         AboutCommand::add('My Package', static fn () => [
@@ -91,19 +95,21 @@ final class DraftServiceProvider extends ServiceProvider
     #[Override]
     public function register(): void
     {
-        $this->mergeConfigFrom(
-            dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'draft.php',
-            'draft'
-        );
+        $configPath = \implode(\DIRECTORY_SEPARATOR,[
+            \dirname(__DIR__),
+            'config',
+            'draft.php',
+        ]);
+
+        $this->mergeConfigFrom($configPath, 'draft');
 
         $application = $this->app;
-        $application->bind(CaseConverterInterface::class, CaseConverter::class);
-        $application->bind(PrinterInterface::class, Printer::class);
-        $application->singleton(Inflector::class, static fn (): Inflector => InflectorFactory::create()->build());
+
+        // $application->bind(CaseConverterInterface::class, CaseConverter::class);
+        // $application->bind(PrinterInterface::class, Printer::class);
+        // $application->singleton(Inflector::class, static fn (): Inflector => InflectorFactory::create()->build());
+
         $application->singleton(ContainerInterface::class, static fn (): Container => Container::getInstance());
-        $application->singleton(
-            Parser::class,
-            static fn (): Parser => $application->get(ParserFactory::class)->createForNewestSupportedVersion(),
-        );
+        $application->singleton(Parser::class, static fn (): Parser => $application->get(ParserFactory::class)->createForNewestSupportedVersion());
     }
 }

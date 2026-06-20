@@ -121,9 +121,16 @@
         "use-parent-dir": false
     },
     "extra": {
+        "ghostwriter": {
+            "container": {
+                "provider": [
+                    "Ghostwriter\\Draft\\Container\\DraftProvider"
+                ]
+            }
+        },
         "laravel": {
             "providers": [
-                "Ghostwriter\\Draft\\DraftServiceProvider"
+                "Ghostwriter\\Draft\\Illuminate\\Support\\ServiceProvider\\DraftServiceProvider"
             ]
         },
         "thanks": {

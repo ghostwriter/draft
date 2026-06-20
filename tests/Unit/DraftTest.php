@@ -18,7 +18,7 @@ use Ghostwriter\Draft\Container\Factory\InflectorFactory;
 use Ghostwriter\Draft\Container\Factory\ParserFactory;
 use Ghostwriter\Draft\Container\ServiceProvider;
 use Ghostwriter\Draft\Draft;
-use Ghostwriter\Draft\DraftServiceProvider;
+use Ghostwriter\Draft\Illuminate\Support\ServiceProvider\DraftServiceProvider;
 use Ghostwriter\Draft\Parser\ClassMap;
 use Ghostwriter\Draft\Parser\FindControllers;
 use Ghostwriter\Draft\Parser\FindModels;
@@ -41,7 +41,6 @@ use PHPUnit\Framework\Attributes\UsesClass;
 #[CoversClass(ModelDefinition::class)]
 #[CoversClass(NewCommand::class)]
 #[CoversClass(ParserFactory::class)]
-#[CoversClass(ServiceProvider::class)]
 #[CoversClass(TraceCommand::class)]
 #[CoversClass(DraftFileNode::class)]
 #[CoversClass(Printer::class)]
