@@ -51,7 +51,7 @@
         "ghostwriter/filesystem": "^0.2.1",
         "ghostwriter/json": "^3.0.3",
         "ghostwriter/shell": "^0.1.6",
-        "laravel/framework": "^13.25.0",
+        "laravel/framework": "^13.26.1",
         "livewire/flux": "^2.17.0",
         "livewire/livewire": "^4.4.1",
         "nikic/php-parser": "^5.8.0"
