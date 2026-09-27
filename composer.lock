@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "338c45ce2474283572fef91b31e62c70",
+    "content-hash": "898ad45c5060c2420fa5366954b4bc8e",
     "packages": [
         {
             "name": "brick/math",
@@ -6609,23 +6609,23 @@
         },
         {
             "name": "boundwize/structarmed",
-            "version": "0.17.3",
+            "version": "0.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/boundwize/structarmed.git",
-                "reference": "b6a6876aa7e5efb6e012045be9394b2994cd145b"
+                "reference": "f2728fead5f561ad91aead1a985728403678c88d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/boundwize/structarmed/zipball/b6a6876aa7e5efb6e012045be9394b2994cd145b",
-                "reference": "b6a6876aa7e5efb6e012045be9394b2994cd145b",
+                "url": "https://api.github.com/repos/boundwize/structarmed/zipball/f2728fead5f561ad91aead1a985728403678c88d",
+                "reference": "f2728fead5f561ad91aead1a985728403678c88d",
                 "shasum": ""
             },
             "require": {
                 "boundwize/jsonrecast": "^1.0",
                 "composer-runtime-api": "^2.0",
                 "fidry/cpu-core-counter": "^1.3",
-                "nikic/php-parser": "^5.7",
+                "nikic/php-parser": "^5.9",
                 "php": "^8.2"
             },
             "require-dev": {
@@ -6675,7 +6675,7 @@
             ],
             "support": {
                 "issues": "https://github.com/boundwize/structarmed/issues",
-                "source": "https://github.com/boundwize/structarmed/tree/0.17.3"
+                "source": "https://github.com/boundwize/structarmed/tree/0.18.0"
             },
             "funding": [
                 {
@@ -6683,7 +6683,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-09-10T17:44:24+00:00"
+            "time": "2026-09-24T03:45:31+00:00"
         },
         {
             "name": "composer/semver",
